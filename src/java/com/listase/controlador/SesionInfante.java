@@ -53,10 +53,10 @@ public class SesionInfante implements Serializable {
     {
         listaInfantes = new ListaSE();        
         //LLenado de la bds
-        listaInfantes.adicionarNodo(new Infante("Carlitos",(short) 1, (byte)2));
-        listaInfantes.adicionarNodo(new Infante("Juanita",(short) 2, (byte)3));
-        listaInfantes.adicionarNodo(new Infante("Martina",(short) 3, (byte)1));
-        listaInfantes.adicionarNodoAlInicio(new Infante("Mariana",(short) 4, (byte)5));
+        listaInfantes.adicionarNodo(new Infante("Carlitos",(short) 1, (byte)2, "Niño"));
+        listaInfantes.adicionarNodo(new Infante("Juanita",(short) 2, (byte)3,"Niña"));
+        listaInfantes.adicionarNodo(new Infante("Martina",(short) 3, (byte)1,"Niña"));
+        listaInfantes.adicionarNodoAlInicio(new Infante("Mariana",(short) 4, (byte)5,"Niña"));
         ayudante = listaInfantes.getCabeza();
         infante = ayudante.getDato();     
         //Me llena el objeto List para la tabla
@@ -242,5 +242,7 @@ public class SesionInfante implements Serializable {
             textoVista = "Tabla";
         }
     }
+    
+  
     
 }
