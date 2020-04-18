@@ -159,12 +159,48 @@
                         </p:column>
                     </p:dataTable>
 
-                    <p:diagram rendered="#{sesionInfante.textoVista=='Tabla'}" value="#{sesionInfante.model}" style="height:600px; width: 100%;" styleClass="ui-widget-content" />
+                    <p:diagram id="diagrama" rendered="#{sesionInfante.textoVista=='Tabla'}" value="#{sesionInfante.model}" style="height:600px; width: 100%;" styleClass="ui-widget-content" />
 
+                    <p:remoteCommand name="elementClickRight"
+                                     actionListener="#{sesionInfante.onClickRigh()}"/>
+                    
+                    
+                    <script>
+                           $(document).ready(function () {
+                    $('.ui-diagram > .ui-diagram-element').mousedown(function (info) {
+                        if (info.which === 3) {
+                            elementClickRight([{
+                                    name: 'elementId',
+                                    value: info.target.id
+                                }]);
+                            
+                        }
+                    });
+                });
+                        
+                    </script>
+             
+                    <p:contextMenu id="mnuDiagrama" for="diagrama"
+                        targetFilter=".ui-diagram-element">
+                        
+                        <p:menuitem value="Ver datos" update="panelinfante"
+                                    oncomplete="PF('dlgDatosInfante').show();"/>
+                        <p:menuitem value="Eliminar"/>
+                        <p:menuitem value="Enviar al final"/>
+                        <p:menuitem value="Enviar al inicio"/>
+                        <p:menuitem value="Adelantar/Perder Posicion"/>
+                    </p:contextMenu>
                 </p:panel>
 
             </p:panel>
         </h:form>
+        <p:dialog id="modalInfante" header="Datos Infante" widgetVar="dlgDatosInfante" modal="true"
+                  height="100">
+            <p:panel id="panelinfante">
+                <h:outputText value="#{sesionInfante.infanteSeleccionado}"/>
+            </p:panel>
+            
+        </p:dialog>
     </h:body>
 </html>
 

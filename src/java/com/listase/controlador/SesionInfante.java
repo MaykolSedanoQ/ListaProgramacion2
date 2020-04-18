@@ -15,6 +15,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import org.primefaces.model.diagram.Connection;
 import org.primefaces.model.diagram.DefaultDiagramModel;
 import org.primefaces.model.diagram.DiagramModel;
@@ -50,6 +51,7 @@ public class SesionInfante implements Serializable {
     private ControladorLocalidades controlLocalidades;
     
     private String codigoDeptoSel;
+    private short infanteSeleccionado;
     
     /**
      * Creates a new instance of SesionInfante
@@ -181,6 +183,15 @@ public class SesionInfante implements Serializable {
     public void setInfante(Infante infante) {
         this.infante = infante;
     }
+
+    public short getInfanteSeleccionado() {
+        return infanteSeleccionado;
+    }
+
+    public void setInfanteSeleccionado(short infanteSeleccionado) {
+        this.infanteSeleccionado = infanteSeleccionado;
+    }
+    
     
     
     
@@ -292,6 +303,7 @@ public class SesionInfante implements Serializable {
                 Element ele = new Element(temp.getDato().getCodigo()+" "+
                         temp.getDato().getNombre(), 
                         posX+"em", posY+"em");
+                ele.setId(String.valueOf(temp.getDato().getCodigo()));
                 //adiciona un conector al cuadrito
                 ele.addEndPoint(new BlankEndPoint(EndPointAnchor.TOP));
                 ele.addEndPoint(new BlankEndPoint(EndPointAnchor.BOTTOM_RIGHT));
@@ -299,7 +311,9 @@ public class SesionInfante implements Serializable {
                 temp=temp.getSiguiente();
                 posX=  posX+5;
                 posY= posY+6;
-            }            
+            }     
+            
+           
            
             //Pinta las flechas            
             for(int i=0; i < model.getElements().size() -1; i++)
@@ -310,6 +324,13 @@ public class SesionInfante implements Serializable {
             
         }
     }
+     public void onClickRigh(){
+                 String id = FacesContext.getCurrentInstance().getExternalContext()
+                .getRequestParameterMap().get("elementId");
+                infanteSeleccionado= Short.valueOf(id.replaceAll("frmInfante:diagrama-", ""));
+                 
+                 
+            }
 
     public void eliminarInfante()
     {
