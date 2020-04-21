@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.listase.modelo.motogp;
+package com.listade.modelo.motogp;
 
 import java.io.Serializable;
 
@@ -16,6 +16,7 @@ public class corredoresMotoGp implements Serializable{
     private  byte edad;
     private short numeroPiloto;
     private String ciudadNacimiento;
+    private String nombreEquipo;
     
     //constructor vacio
 
@@ -25,13 +26,15 @@ public class corredoresMotoGp implements Serializable{
     
     //constructor lleno
 
-    public corredoresMotoGp(String nombre, byte edad, short numeroPiloto, String ciudadNacimiento) {
+    public corredoresMotoGp(String nombre, byte edad, short numeroPiloto, String ciudadNacimiento, String nombreEquipo) {
         this.nombre = nombre;
         this.edad = edad;
         this.numeroPiloto = numeroPiloto;
         this.ciudadNacimiento = ciudadNacimiento;
+        this.nombreEquipo = nombreEquipo;
     }
-    
+
+   
     //get y set
 
     public String getNombre() {
@@ -65,6 +68,16 @@ public class corredoresMotoGp implements Serializable{
     public void setCiudadNacimiento(String ciudadNacimiento) {
         this.ciudadNacimiento = ciudadNacimiento;
     }
+
+    public String getNombreEquipo() {
+        return nombreEquipo;
+    }
+
+    public void setNombreEquipo(String nombreEquipo) {
+        this.nombreEquipo = nombreEquipo;
+    }
+
+   
     
     //to string
 
