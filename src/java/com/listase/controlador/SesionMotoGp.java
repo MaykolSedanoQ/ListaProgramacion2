@@ -310,5 +310,29 @@ public class SesionMotoGp implements Serializable {
     }
     //------------------------------------------------------------------
     
+    // envir piloto al inicio
+   public void enviarPilotoUltimaPos(){
+       try{
+           corredoresMotoGp corredorTemp = listaPilotos.obtenerPiloto(pilotoSeleccionado);
+           listaPilotos.eliminarPiloto(pilotoSeleccionado);
+           listaPilotos.adicionarPiloto(corredorTemp);
+           pintarLista();
+       }catch(pilotosExepcion ex){
+           JsfUtil.addErrorMessage(ex.getMessage());
+       }
+   }
+   //--------------------------------------------------------
+   //piloto primera posicion
+   public  void  enviarPilotoPrimeraPos(){
+       try{
+           corredoresMotoGp corredorTemp = listaPilotos.obtenerPiloto(pilotoSeleccionado);
+        listaPilotos.eliminarPiloto(pilotoSeleccionado);
+        listaPilotos.adiccionarPilotoAlInicio(corredorTemp);
+        pintarLista();
+       }catch(pilotosExepcion ex){
+           JsfUtil.addErrorMessage(ex.getMessage());
+       }
+   }
    
+   //--------------------------------------------------
 }
