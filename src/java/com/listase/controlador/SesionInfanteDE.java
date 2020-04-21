@@ -210,6 +210,8 @@ public class SesionInfanteDE implements Serializable {
     
     
     
+    //metodos
+    
     public void guardarInfante()
     {
         //obtiene el consecutivo

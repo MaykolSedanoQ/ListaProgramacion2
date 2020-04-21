@@ -8,13 +8,24 @@ package com.listase.controlador;
 import com.listade.modelo.motogp.corredoresMotoGp;
 import com.listade.modelo.motogp.listaMotoGp;
 import com.listade.modelo.motogp.nodoMotoGp;
+import com.listase.excepciones.pilotosExepcion;
+import com.listase.utilidades.JsfUtil;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Default;
+import javax.faces.context.FacesContext;
+import org.primefaces.model.diagram.Connection;
 import org.primefaces.model.diagram.DefaultDiagramModel;
+import org.primefaces.model.diagram.Element;
+import org.primefaces.model.diagram.connector.StateMachineConnector;
+import org.primefaces.model.diagram.endpoint.BlankEndPoint;
+import org.primefaces.model.diagram.endpoint.EndPoint;
+import org.primefaces.model.diagram.endpoint.EndPointAnchor;
+import org.primefaces.model.diagram.overlay.ArrowOverlay;
+import org.primefaces.model.diagram.overlay.LabelOverlay;
 
 /**
  *
@@ -22,35 +33,35 @@ import org.primefaces.model.diagram.DefaultDiagramModel;
  */
 @Named(value = "sesionMotoGp")
 @Dependent
-public class SesionMotoGp  implements Serializable{
+public class SesionMotoGp implements Serializable {
+
     private listaMotoGp listaPilotos;
     private corredoresMotoGp corredores;
-    private String alInicio="1";
-    private boolean desahabilitarFormulario=true;
+    private String alInicio = "1";
+    private boolean desahabilitarFormulario = true;
     private nodoMotoGp ayudante;
-    private String textoVista="Grafico";
+    private String textoVista = "Grafico";
     private List listadoPilotos;
-    private  DefaultDiagramModel model;
-    private short codigoEliminar;
+    private DefaultDiagramModel model;
+    private short numeroDelPilotoAEliminar;
     private short pilotoSeleccionado;
     private corredoresMotoGp pilotoDiagrama;
-    
 
     /**
      * Creates a new instance of SesionMotoGp
      */
     public SesionMotoGp() {
     }
+
     @PostConstruct
-    private void inicializar(){
-        
+    private void inicializar() {
+
         listaPilotos = new listaMotoGp();
         //llenar
-        listaPilotos.adicionarPiloto(new corredoresMotoGp("Maykoll",(byte)30 , (short)16, "Manizales", "Yamaha"));
+        listaPilotos.adicionarPiloto(new corredoresMotoGp("Maykoll", (byte) 30, (short) 16, "Manizales", "Yamaha"));
     }
-    
-    //get y set
 
+    //get y set
     public listaMotoGp getListaPilotos() {
         return listaPilotos;
     }
@@ -115,12 +126,12 @@ public class SesionMotoGp  implements Serializable{
         this.model = model;
     }
 
-    public short getCodigoEliminar() {
-        return codigoEliminar;
+    public short getNumeroDelPilotoAEliminar() {
+        return numeroDelPilotoAEliminar;
     }
 
-    public void setCodigoEliminar(short codigoEliminar) {
-        this.codigoEliminar = codigoEliminar;
+    public void setNumeroDelPilotoAEliminar(short numeroDelPilotoAEliminar) {
+        this.numeroDelPilotoAEliminar = numeroDelPilotoAEliminar;
     }
 
     public short getPilotoSeleccionado() {
@@ -138,6 +149,166 @@ public class SesionMotoGp  implements Serializable{
     public void setPilotoDiagrama(corredoresMotoGp pilotoDiagrama) {
         this.pilotoDiagrama = pilotoDiagrama;
     }
+
+    private Connection createConnection(EndPoint from, EndPoint to, String label) {
+        Connection conn = new Connection(from, to);
+        conn.getOverlays().add(new ArrowOverlay(20, 20, 1, 1));
+
+        if (label != null) {
+            conn.getOverlays().add(new LabelOverlay(label, "flow-label", 0.5));
+        }
+
+        return conn;
+    }
+
+    //metodos
+    //guardar un piloto nuevo
+    public void guardarPilotos() {
+        corredores.setNumeroPiloto((short) (listaPilotos.contarPilotos() + 1));
+        if (alInicio.compareTo("1") == 0) {
+            listaPilotos.adiccionarPilotoAlInicio(corredores);
+        } else {
+            listaPilotos.adicionarPiloto(corredores);
+        }
+        listadoPilotos = listaPilotos.obtenerListaPilotos();
+        pintarLista();
+        desahabilitarFormulario = true;
+        JsfUtil.addSuccessMessage("El piloto se ha guardado correctamente");
+    }
+    //--------------------------------------------------------------------------------------------  
+
+    //Habilitar el formulario para los pilotos
+    public void hablitarFormularioPilotos() {
+        desahabilitarFormulario = false;
+        corredores = new corredoresMotoGp();
+    }
+    //--------------------------------------------------------------------------------------------
+
+    //ir al siguiente piloto
+    public void irAlSiguientePiloto() {
+        if (ayudante.getSiguiente() != null) {
+            ayudante = ayudante.getSiguiente();
+            corredores = ayudante.getDato();
+        }
+    }
+    //------------------------------------------------------------------------------------------ 
+
+    //ir al anterior piloto
+    public void irAlAnteriorPiloto() {
+        if (ayudante.getAnterior() != null) {
+            ayudante = ayudante.getAnterior();
+            corredores = ayudante.getDato();
+        }
+    }
+    //--------------------------------------------------------------------------------------------
+
+    public void irAlPrimerPiloto() {
+        if (listaPilotos.getCabeza() != null) {
+            ayudante = listaPilotos.getCabeza();
+            corredores = ayudante.getDato();
+        } else {
+            corredores = new corredoresMotoGp();
+        }
+        listadoPilotos = listaPilotos.obtenerListaPilotos();
+        pintarLista();
+    }
+//-----------------------------------------------------------------------------------------
+
+    public void irAlUltimoPiloto() {
+        if (listaPilotos.getCabeza() != null) {
+            while (ayudante.getSiguiente() != null) {
+                ayudante = ayudante.getSiguiente();
+            }
+            corredores = ayudante.getDato();
+        }
+    }
+    //-------------------------------------------------------------------------
+
+    public void pintarLista() {
+        //Instancia el modelo
+        model = new DefaultDiagramModel();
+        //Se establece para que el diagrama pueda tener infinitas flechas
+        model.setMaxConnections(-1);
+
+        StateMachineConnector connector = new StateMachineConnector();
+        connector.setOrientation(StateMachineConnector.Orientation.ANTICLOCKWISE);
+        connector.setPaintStyle("{strokeStyle:'#7D7463',lineWidth:3}");
+        model.setDefaultConnector(connector);
+
+        ///Adicionar los elementos
+        if (listaPilotos.getCabeza() != null) {
+            //llamo a mi ayudante
+            nodoMotoGp temp = listaPilotos.getCabeza();
+            int posX = 2;
+            int posY = 2;
+            //recorro la lista de principio a fin
+            while (temp != null) {
+                //Parado en un elemento
+                //Crea el cuadrito y lo adiciona al modelo
+                Element ele = new Element(temp.getDato().getNumeroPiloto() + " "
+                        + temp.getDato().getNombre(),
+                        posX + "em", posY + "em");
+                ele.setId(String.valueOf(temp.getDato().getNumeroPiloto()));
+                //adiciona un conector al cuadrito
+                ele.addEndPoint(new BlankEndPoint(EndPointAnchor.TOP));
+                ele.addEndPoint(new BlankEndPoint(EndPointAnchor.BOTTOM_RIGHT));
+
+                ele.addEndPoint(new BlankEndPoint(EndPointAnchor.BOTTOM_LEFT));
+                ele.addEndPoint(new BlankEndPoint(EndPointAnchor.BOTTOM));
+                model.addElement(ele);
+                temp = temp.getSiguiente();
+                posX = posX + 5;
+                posY = posY + 6;
+            }
+
+            //pintar flechas
+            for (int i = 0; i < model.getElements().size() - 1; i++) {
+                model.connect(createConnection(model.getElements().get(i).getEndPoints().get(1),
+                        model.getElements().get(i + 1).getEndPoints().get(0), "Sig"));
+
+                model.connect(createConnection(model.getElements().get(i + 1).getEndPoints().get(2),
+                        model.getElements().get(i).getEndPoints().get(3), "Ant"));
+            }
+
+        }
+    }
+    //------------------------------------------------------------------------
+
+    public void onClickRight() {
+        String id = FacesContext.getCurrentInstance().getExternalContext()
+                .getRequestParameterMap().get("elementId");
+
+        pilotoSeleccionado = Short.valueOf(id.replaceAll("frmInfante:diagrama-", ""));
+
+    }
+    //----------------------------------------------------------------------------------------------
+
+    //eliminar un piloto
+    public void eliminarPiloto() {
+        if (numeroDelPilotoAEliminar >= 0) {
+            try {
+                listaPilotos.eliminarPiloto(numeroDelPilotoAEliminar);
+                irAlPrimerPiloto();
+                JsfUtil.addSuccessMessage("Piloto" + numeroDelPilotoAEliminar + "Eliminado");
+            } catch (pilotosExepcion e) {
+                JsfUtil.addErrorMessage(e.getMessage());
+            }
+        } else {
+            JsfUtil.addErrorMessage("El numero del piloto" + numeroDelPilotoAEliminar + "No es valido");
+        }
+    }
+//-----------------------------------------------------------------------------------
     
+    //obetener el diagrama de los pilotos
+    public  void obtenerDiamgramaPilotos(){
+        try{
+            pilotoDiagrama= listaPilotos.obtenerPiloto(pilotoSeleccionado);
+            
+        }catch(pilotosExepcion ex){
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    //------------------------------------------------------------------
     
+   
 }

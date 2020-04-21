@@ -5,6 +5,7 @@
  */
 package com.listade.modelo.motogp;
 
+import com.listase.excepciones.pilotosExepcion;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -138,6 +139,58 @@ public void invertirPosicionesPilitos(){
 //    if(cabeza==null)
 //}
    
+public  void eliminarPiloto(short numeroPiloto )throws pilotosExepcion{
+   
+    if(cabeza!=null){
+        if(cabeza.getDato().getNumeroPiloto()== numeroPiloto){
+            cabeza= cabeza.getSiguiente();
+            cabeza.setAnterior(null);
+            return;
+        }
+        else{
+            nodoMotoGp temp= cabeza;
+            while(temp.getSiguiente()!=null){
+                if(temp.getSiguiente().getDato().getNumeroPiloto()==numeroPiloto){
+                    temp.setSiguiente(temp.getSiguiente().getSiguiente());
+                    if(temp.getSiguiente()!=null)
+                        temp.getSiguiente().setAnterior(temp);
+                    return;
+                }
+                temp = temp.getSiguiente();
+            }
+            throw new pilotosExepcion("El numero"+numeroPiloto+"no existe en los pilotos");
+        }
+        
+    }
+    throw new pilotosExepcion("La lista de los pilotos esta vacia");
+}
+
+     public corredoresMotoGp obtenerPiloto (short numeroPiloto ) throws pilotosExepcion
+    {
+        if(cabeza !=null)
+        {
+            if(cabeza.getDato().getNumeroPiloto()==numeroPiloto)
+            {                
+                return cabeza.getDato();
+            }
+            else
+            {
+                nodoMotoGp temp=cabeza;
+                while(temp!=null)
+                {
+                    if(temp.getDato().getNumeroPiloto()== numeroPiloto)
+                    {                                                
+                        return temp.getDato();
+                    }
+                    temp = temp.getSiguiente();
+                }
+                
+                throw new pilotosExepcion("El numero del piloto "+numeroPiloto +" no existe en la lista");
+            }
+        }
+        throw new pilotosExepcion("La lista de pilotos está vacía");
+    }
+    
 
 }
 
