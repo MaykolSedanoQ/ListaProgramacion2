@@ -224,6 +224,31 @@ public class SesionMotoGp implements Serializable {
     }
     //-------------------------------------------------------------------------
 
+     public void cambiarVistaPiloto()
+    {
+        if(textoVista.compareTo("Tabla")==0)
+        {
+            textoVista = "Gráfico";
+        }
+        else
+        {
+            textoVista = "Tabla";
+        }
+    }
+    //----------------------------------------------
+    
+    
+    
+    
+    
+      public void invertirLista(){
+        //Invierte la lista
+        listaPilotos.invertirPosicionesPilitos();
+        irAlPrimerPiloto();
+    }
+    
+    
+    
     public void pintarLista() {
         //Instancia el modelo
         model = new DefaultDiagramModel();
