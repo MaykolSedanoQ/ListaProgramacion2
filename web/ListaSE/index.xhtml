@@ -187,7 +187,8 @@
                                     action="#{sesionInfante.obtenerInfanteDiagrama()}" 
                                     update="panelInfante"                                    
                                     oncomplete="PF('dlgDatosInfante').show();" />
-                        <p:menuitem value="Eliminar"/>
+                        <p:menuitem value="Eliminar" update="pnlVista"
+                                    action="#{sesionInfante.eliminarInfante()}"/>
                         <p:menuitem value="Enviar al final" update="pnlVista"                                    
                                     action="#{sesionInfante.enviarAlFinal()}"/>
                         <p:menuitem value="Enviar al inicio" update="pnlVista"                                    
@@ -209,6 +210,10 @@
                         <h:outputText value="Género:" />
                         <h:outputText rendered="#{sesionInfante.infanteDiagrama.genero}" value="Masculino" />
                         <h:outputText rendered="#{!sesionInfante.infanteDiagrama.genero}" value="Femenino" />
+                         <h:outputText value="Edad:" />
+                         <h:outputText value="#{sesionInfante.infanteDiagrama.edad}" />
+                          <h:outputText value="Ciudad De Nacimiento:" />
+                          <h:outputText value="#{sesionInfante.infanteDiagrama.ciudadNacimiento}" />
                     </h:panelGrid>
                     
                 </p:panel>

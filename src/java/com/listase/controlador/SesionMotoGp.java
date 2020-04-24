@@ -46,6 +46,7 @@ public class SesionMotoGp implements Serializable {
     private short numeroDelPilotoAEliminar;
     private short pilotoSeleccionado;
     private corredoresMotoGp pilotoDiagrama;
+    private int numeroPosiciones=0;
 
     /**
      * Creates a new instance of SesionMotoGp
@@ -60,8 +61,16 @@ public class SesionMotoGp implements Serializable {
         //llenar
         listaPilotos.adicionarPiloto(new corredoresMotoGp("Maykoll", (byte) 30, (short) 16, "Manizales", "Yamaha"));
     }
+    
+    public int getNumeroPosiciones() {
+        return numeroPosiciones;
+    }
 
     //get y set
+    public void setNumeroPosiciones(int numeroPosiciones) {    
+        this.numeroPosiciones = numeroPosiciones;
+    }
+
     public listaMotoGp getListaPilotos() {
         return listaPilotos;
     }
@@ -360,4 +369,9 @@ public class SesionMotoGp implements Serializable {
    }
    
    //--------------------------------------------------
+
+
+
+
+
 }
