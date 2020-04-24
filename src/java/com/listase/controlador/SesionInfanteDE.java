@@ -428,6 +428,22 @@ public class SesionInfanteDE implements Serializable {
         }
     }
     
+    //eliminar infante.---------------------------------------
+    
+     public void eliminarInfanteseleccionado()
+    {
+             try {
+            ///Buscar el infante y guardar los datos en una variable temporal
+            Infante infTemporal = listaInfantes.obtenerInfante(infanteSeleccionado);
+            // Eliminar el nodo
+            listaInfantes.eliminarInfante(infanteSeleccionado);
+            pintarLista();
+        } catch (InfanteExcepcion ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+ 
     
     
 }
