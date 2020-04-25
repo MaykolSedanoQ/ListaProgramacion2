@@ -5,9 +5,9 @@
  */
 package com.listase.controlador;
 
-import com.listade.modelo.motogp.corredoresMotoGp;
-import com.listade.modelo.motogp.listaMotoGp;
-import com.listade.modelo.motogp.nodoMotoGp;
+import com.listade.modelo.motogp.CorredoresMotoGp;
+import com.listade.modelo.motogp.ListaMotoGp;
+import com.listade.modelo.motogp.NodoMotoGp;
 import com.listase.excepciones.pilotosExepcion;
 import com.listase.utilidades.JsfUtil;
 import java.io.Serializable;
@@ -35,17 +35,17 @@ import org.primefaces.model.diagram.overlay.LabelOverlay;
 @Dependent
 public class SesionMotoGp implements Serializable {
 
-    private listaMotoGp listaPilotos;
-    private corredoresMotoGp corredores;
+    private ListaMotoGp listaPilotos;
+    private CorredoresMotoGp corredores;
     private String alInicio = "1";
     private boolean desahabilitarFormulario = true;
-    private nodoMotoGp ayudante;
+    private NodoMotoGp ayudante;
     private String textoVista = "Grafico";
     private List listadoPilotos;
     private DefaultDiagramModel model;
     private short numeroDelPilotoAEliminar;
     private short pilotoSeleccionado;
-    private corredoresMotoGp pilotoDiagrama;
+    private CorredoresMotoGp pilotoDiagrama;
     private int numeroPosiciones=0;
 
     /**
@@ -57,9 +57,9 @@ public class SesionMotoGp implements Serializable {
     @PostConstruct
     private void inicializar() {
 
-        listaPilotos = new listaMotoGp();
+        listaPilotos = new ListaMotoGp();
         //llenar
-        listaPilotos.adicionarPiloto(new corredoresMotoGp("Maykoll", (byte) 30, (short) 16, "Manizales", "Yamaha"));
+        listaPilotos.adicionarPiloto(new CorredoresMotoGp("Maykoll", (byte) 30, (short) 16, "Manizales", "Yamaha"));
     }
     
     public int getNumeroPosiciones() {
@@ -71,19 +71,19 @@ public class SesionMotoGp implements Serializable {
         this.numeroPosiciones = numeroPosiciones;
     }
 
-    public listaMotoGp getListaPilotos() {
+    public ListaMotoGp getListaPilotos() {
         return listaPilotos;
     }
 
-    public void setListaPilotos(listaMotoGp listaPilotos) {
+    public void setListaPilotos(ListaMotoGp listaPilotos) {
         this.listaPilotos = listaPilotos;
     }
 
-    public corredoresMotoGp getCorredores() {
+    public CorredoresMotoGp getCorredores() {
         return corredores;
     }
 
-    public void setCorredores(corredoresMotoGp corredores) {
+    public void setCorredores(CorredoresMotoGp corredores) {
         this.corredores = corredores;
     }
 
@@ -103,11 +103,11 @@ public class SesionMotoGp implements Serializable {
         this.desahabilitarFormulario = desahabilitarFormulario;
     }
 
-    public nodoMotoGp getAyudante() {
+    public NodoMotoGp getAyudante() {
         return ayudante;
     }
 
-    public void setAyudante(nodoMotoGp ayudante) {
+    public void setAyudante(NodoMotoGp ayudante) {
         this.ayudante = ayudante;
     }
 
@@ -151,11 +151,11 @@ public class SesionMotoGp implements Serializable {
         this.pilotoSeleccionado = pilotoSeleccionado;
     }
 
-    public corredoresMotoGp getPilotoDiagrama() {
+    public CorredoresMotoGp getPilotoDiagrama() {
         return pilotoDiagrama;
     }
 
-    public void setPilotoDiagrama(corredoresMotoGp pilotoDiagrama) {
+    public void setPilotoDiagrama(CorredoresMotoGp pilotoDiagrama) {
         this.pilotoDiagrama = pilotoDiagrama;
     }
 
@@ -189,7 +189,7 @@ public class SesionMotoGp implements Serializable {
     //Habilitar el formulario para los pilotos
     public void hablitarFormularioPilotos() {
         desahabilitarFormulario = false;
-        corredores = new corredoresMotoGp();
+        corredores = new CorredoresMotoGp();
     }
     //--------------------------------------------------------------------------------------------
 
@@ -216,7 +216,7 @@ public class SesionMotoGp implements Serializable {
             ayudante = listaPilotos.getCabeza();
             corredores = ayudante.getDato();
         } else {
-            corredores = new corredoresMotoGp();
+            corredores = new CorredoresMotoGp();
         }
         listadoPilotos = listaPilotos.obtenerListaPilotos();
         pintarLista();
@@ -272,7 +272,7 @@ public class SesionMotoGp implements Serializable {
         ///Adicionar los elementos
         if (listaPilotos.getCabeza() != null) {
             //llamo a mi ayudante
-            nodoMotoGp temp = listaPilotos.getCabeza();
+            NodoMotoGp temp = listaPilotos.getCabeza();
             int posX = 2;
             int posY = 2;
             //recorro la lista de principio a fin
@@ -347,7 +347,7 @@ public class SesionMotoGp implements Serializable {
     // envir piloto al inicio
    public void enviarPilotoUltimaPos(){
        try{
-           corredoresMotoGp corredorTemp = listaPilotos.obtenerPiloto(pilotoSeleccionado);
+           CorredoresMotoGp corredorTemp = listaPilotos.obtenerPiloto(pilotoSeleccionado);
            listaPilotos.eliminarPiloto(pilotoSeleccionado);
            listaPilotos.adicionarPiloto(corredorTemp);
            pintarLista();
@@ -359,7 +359,7 @@ public class SesionMotoGp implements Serializable {
    //piloto primera posicion
    public  void  enviarPilotoPrimeraPos(){
        try{
-           corredoresMotoGp corredorTemp = listaPilotos.obtenerPiloto(pilotoSeleccionado);
+           CorredoresMotoGp corredorTemp = listaPilotos.obtenerPiloto(pilotoSeleccionado);
         listaPilotos.eliminarPiloto(pilotoSeleccionado);
         listaPilotos.adiccionarPilotoAlInicio(corredorTemp);
         pintarLista();
