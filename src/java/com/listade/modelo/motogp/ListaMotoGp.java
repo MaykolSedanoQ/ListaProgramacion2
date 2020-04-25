@@ -191,6 +191,9 @@ public  void eliminarPiloto(short numeroPiloto )throws pilotosExepcion{
         throw new pilotosExepcion("La lista de pilotos está vacía");
     }
     
+     public void prueba (){
+         
+     }
 
 }
 
