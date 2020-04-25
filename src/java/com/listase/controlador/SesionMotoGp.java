@@ -8,7 +8,7 @@ package com.listase.controlador;
 import com.listade.modelo.motogp.CorredoresMotoGp;
 import com.listade.modelo.motogp.ListaMotoGp;
 import com.listade.modelo.motogp.NodoMotoGp;
-import com.listase.excepciones.pilotosExepcion;
+import com.listase.excepciones.PilotosExcepcion;
 import com.listase.utilidades.JsfUtil;
 import java.io.Serializable;
 import java.util.List;
@@ -324,7 +324,7 @@ public class SesionMotoGp implements Serializable {
                 listaPilotos.eliminarPiloto(numeroDelPilotoAEliminar);
                 irAlPrimerPiloto();
                 JsfUtil.addSuccessMessage("Piloto" + numeroDelPilotoAEliminar + "Eliminado");
-            } catch (pilotosExepcion e) {
+            } catch (PilotosExcepcion e) {
                 JsfUtil.addErrorMessage(e.getMessage());
             }
         } else {
@@ -338,7 +338,7 @@ public class SesionMotoGp implements Serializable {
         try{
             pilotoDiagrama= listaPilotos.obtenerPiloto(pilotoSeleccionado);
             
-        }catch(pilotosExepcion ex){
+        }catch(PilotosExcepcion ex){
             JsfUtil.addErrorMessage(ex.getMessage());
         }
     }
@@ -351,7 +351,7 @@ public class SesionMotoGp implements Serializable {
            listaPilotos.eliminarPiloto(pilotoSeleccionado);
            listaPilotos.adicionarPiloto(corredorTemp);
            pintarLista();
-       }catch(pilotosExepcion ex){
+       }catch(PilotosExcepcion ex){
            JsfUtil.addErrorMessage(ex.getMessage());
        }
    }
@@ -363,7 +363,7 @@ public class SesionMotoGp implements Serializable {
         listaPilotos.eliminarPiloto(pilotoSeleccionado);
         listaPilotos.adiccionarPilotoAlInicio(corredorTemp);
         pintarLista();
-       }catch(pilotosExepcion ex){
+       }catch(PilotosExcepcion ex){
            JsfUtil.addErrorMessage(ex.getMessage());
        }
    }

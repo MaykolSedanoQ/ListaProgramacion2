@@ -5,7 +5,7 @@
  */
 package com.listade.modelo.motogp;
 
-import com.listase.excepciones.pilotosExepcion;
+import com.listase.excepciones.PilotosExcepcion;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -139,7 +139,7 @@ public void invertirPosicionesPilitos(){
 //    if(cabeza==null)
 //}
    
-public  void eliminarPiloto(short numeroPiloto )throws pilotosExepcion{
+public  void eliminarPiloto(short numeroPiloto )throws PilotosExcepcion{
    
     if(cabeza!=null){
         if(cabeza.getDato().getNumeroPiloto()== numeroPiloto){
@@ -158,14 +158,14 @@ public  void eliminarPiloto(short numeroPiloto )throws pilotosExepcion{
                 }
                 temp = temp.getSiguiente();
             }
-            throw new pilotosExepcion("El numero"+numeroPiloto+"no existe en los pilotos");
+            throw new PilotosExcepcion("El numero"+numeroPiloto+"no existe en los pilotos");
         }
         
     }
-    throw new pilotosExepcion("La lista de los pilotos esta vacia");
+    throw new PilotosExcepcion("La lista de los pilotos esta vacia");
 }
 
-     public CorredoresMotoGp obtenerPiloto (short numeroPiloto ) throws pilotosExepcion
+     public CorredoresMotoGp obtenerPiloto (short numeroPiloto ) throws PilotosExcepcion
     {
         if(cabeza !=null)
         {
@@ -185,10 +185,10 @@ public  void eliminarPiloto(short numeroPiloto )throws pilotosExepcion{
                     temp = temp.getSiguiente();
                 }
                 
-                throw new pilotosExepcion("El numero del piloto "+numeroPiloto +" no existe en la lista");
+                throw new PilotosExcepcion("El numero del piloto "+numeroPiloto +" no existe en la lista");
             }
         }
-        throw new pilotosExepcion("La lista de pilotos está vacía");
+        throw new PilotosExcepcion("La lista de pilotos está vacía");
     }
     
      public void prueba (){
