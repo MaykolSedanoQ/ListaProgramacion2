@@ -428,7 +428,7 @@ public class SesionInfanteDE implements Serializable {
         }
     }
     
-    //eliminar infante.---------------------------------------
+    //eliminar infante en el diagrama.---------------------------------------
     
      public void eliminarInfanteseleccionado()
     {
