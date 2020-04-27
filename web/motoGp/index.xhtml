@@ -43,56 +43,56 @@
             <p:commandButton value="Volver" action="inicio" />
             <p:panel   header="Moto Gp">
                 <p:panelGrid columns="2"/>
-                    <p:panel header="Datos del Piloto">
-                         <p:panelGrid columns="2">
-                            <p:outputLabel for="txtNombre" value="Nombre"/>
-                            <p:inputText id="txtNombre" required="true" disabled="#{sesionMotoGp.desahabilitarFormulario}"
-                                         value="#{sesionMotoGp.corredores.nombre}"/>
-                            <p:outputLabel for="spEdad" value="Edad"/>
-                            <p:spinner id="spEdad" required="true" min="13" max="50" disabled="#{sesionMotoGp.desahabilitarFormulario}"
-                                       value="#{sesionMotoGp.corredores.edad}"/>
-                            
-                            <p:outputLabel for="txtNacionalidad" value="Nacionalidad"/>
-                            <p:inputText id="txtNacionalidad" required="true" disabled="#{sesionMotoGp.desahabilitarFormulario}"
-                                         value="#{sesionMotoGp.corredores.ciudadNacimiento}"/>
-                           
-                            <p:outputLabel for="txtNombreDelEquipo" value="Nombre Del Equipo"/>
-                            <p:inputText id="txtNombreDelEquipo" required="true" disabled="#{sesionMotoGp.desahabilitarFormulario}"
-                                         value="#{sesionMotoGp.corredores.nombreEquipo}"/>
+                <p:panel header="Datos del Piloto">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel for="txtNombre" value="Nombre"/>
+                        <p:inputText id="txtNombre" required="true" disabled="#{sesionMotoGp.desahabilitarFormulario}"
+                                     value="#{sesionMotoGp.corredores.nombre}"/>
+                        <p:outputLabel for="spEdad" value="Edad"/>
+                        <p:spinner id="spEdad" required="true" min="13" max="50" disabled="#{sesionMotoGp.desahabilitarFormulario}"
+                                   value="#{sesionMotoGp.corredores.edad}"/>
 
-                             </p:panelGrid>
-                        
-                        
-                        <p:commandButton value="Nuevo Piloto" update="frmMotoGp,:grwlErrores" action="#{sesionMotoGp.hablitarFormularioPilotos()}"
-                                         disabled="#{!sesionMotoGp.desahabilitarFormulario}"/>
-                        
-                        <p:commandButton value="Guardar Piloto" update="frmMotoGp,:grwlErrores"
-                                         action="#{sesionMotoGp.guardarPilotos()}" disabled="#{sesionMotoGp.desahabilitarFormulario}"/>
+                        <p:outputLabel for="txtNacionalidad" value="Nacionalidad"/>
+                        <p:inputText id="txtNacionalidad" required="true" disabled="#{sesionMotoGp.desahabilitarFormulario}"
+                                     value="#{sesionMotoGp.corredores.ciudadNacimiento}"/>
 
-                        
-                        <p:panelGrid columns="4">
-                            <p:commandButton value="Primero" action="#{sesionMotoGp.irAlPrimerPiloto()}" 
-                                             update="frmMotoGp"/>
-                            <p:commandButton value="Anterior" action="#{sesionMotoGp.irAlAnteriorPiloto()}"
-                                             update="frmMotoGp"/>
-                            <p:commandButton value="Siguiente" action="#{sesionMotoGp.irAlSiguientePiloto()}"
-                                             update="frmMotoGp"/>       
-                            <p:commandButton value="Último" action="#{sesionMotoGp.irAlUltimoPiloto()}" 
-                                             update="frmMotoGp"/>                           
-                         </p:panelGrid>
-                       
-                        
-                        <p:outputLabel value="Numero del Piloto a eliminar: "/>
-                        <p:inputText value="#{sesionMotoGp.numeroDelPilotoAEliminar}" maxlength="4" size="10"/>
-                        <p:commandButton value="Eliminar" action="#{sesionMotoGp.eliminarPiloto()}" 
-                                         update="frmMotoGp,:grwlErrores"/>
-                    </p:panel>
+                        <p:outputLabel for="txtNombreDelEquipo" value="Nombre Del Equipo"/>
+                        <p:inputText id="txtNombreDelEquipo" required="true" disabled="#{sesionMotoGp.desahabilitarFormulario}"
+                                     value="#{sesionMotoGp.corredores.nombreEquipo}"/>
 
-                       
-                        </p:panel>
-             
+                    </p:panelGrid>
 
-             
+
+                    <p:commandButton value="Nuevo Piloto" update="frmMotoGp" action="#{sesionMotoGp.hablitarFormularioPilotos()}"
+                                     disabled="#{!sesionMotoGp.desahabilitarFormulario}"/>
+
+                    <p:commandButton value="Guardar Piloto" update="frmMotoGp,:grwlErrores"
+                                     action="#{sesionMotoGp.guardarPilotos()}" disabled="#{sesionMotoGp.desahabilitarFormulario}"/>
+
+
+                    <p:panelGrid columns="4">
+                        <p:commandButton value="Primero" action="#{sesionMotoGp.irAlPrimerPiloto()}" 
+                                         update="frmMotoGp"/>
+                        <p:commandButton value="Anterior" action="#{sesionMotoGp.irAlAnteriorPiloto()}"
+                                         update="frmMotoGp"/>
+                        <p:commandButton value="Siguiente" action="#{sesionMotoGp.irAlSiguientePiloto()}"
+                                         update="frmMotoGp"/>       
+                        <p:commandButton value="Último" action="#{sesionMotoGp.irAlUltimoPiloto()}" 
+                                         update="frmMotoGp"/>                           
+                    </p:panelGrid>
+
+
+                    <p:outputLabel value="Numero del Piloto a eliminar: "/>
+                    <p:inputText value="#{sesionMotoGp.numeroDelPilotoAEliminar}" maxlength="4" size="10"/>
+                    <p:commandButton value="Eliminar" action="#{sesionMotoGp.eliminarPiloto()}" 
+                                     update="frmMotoGp,:grwlErrores"/>
+                </p:panel>
+
+
+            </p:panel>
+
+
+
         </h:form>
 
     </h:body>

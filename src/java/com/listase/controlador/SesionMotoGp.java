@@ -188,7 +188,7 @@ public class SesionMotoGp implements Serializable {
 
     //Habilitar el formulario para los pilotos
     public void hablitarFormularioPilotos() {
-        desahabilitarFormulario = false;
+        desahabilitarFormulario=false;
         corredores = new CorredoresMotoGp();
     }
     //--------------------------------------------------------------------------------------------
