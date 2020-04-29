@@ -185,10 +185,11 @@ public class SesionMotoGp implements Serializable {
         JsfUtil.addSuccessMessage("El piloto se ha guardado correctamente");
     }
     //--------------------------------------------------------------------------------------------  
-
+    
     //Habilitar el formulario para los pilotos
-    public void hablitarFormularioPilotos() {
-        desahabilitarFormulario=false;
+    public void hablitarFormularioPiloto() 
+    {
+        desahabilitarFormulario = false;
         corredores = new CorredoresMotoGp();
     }
     //--------------------------------------------------------------------------------------------
