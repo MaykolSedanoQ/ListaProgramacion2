@@ -37,11 +37,10 @@
         </style>
     </h:head>
     <h:body>
-        <p:growl id="grwlErrores"/>
         <h:form id="frmMotoGp">
             <p:commandButton value="Volver" action="inicio"/>
             <center>
-                <p:panel header="Moto Gp" />  
+                <p:panel id="pnlMotoGp" header="Moto Gp" />  
                 <p:panel header="Datos de los pilotos">
                     <p:panelGrid columns="2">
                         <p:outputLabel for="txtNombre" value="Nombre Del Piloto"/>
@@ -63,11 +62,11 @@
                                      value="#{sesionMotoGp.corredores.nombreEquipo}"/>
                     </p:panelGrid>
 
-                    <p:commandButton value="Nuevo Piloto" update="frmMotoGp"
+                    <p:commandButton value="Nuevo Piloto" update="pnlMotoGp"
                                      action="#{sesionMotoGp.hablitarFormularioPiloto()}"
                                      disabled="#{!sesionMotoGp.desahabilitarFormulario}"/>
 
-                    <p:commandButton value="Guardar Piloto" update="frmMotoGp,:grwlErrores"
+                    <p:commandButton value="Guardar Piloto" update="pnlMotoGp"
                                      action="#{sesionMotoGp.guardarPilotos()}"/>
 
                     <p:panelGrid columns="2">
@@ -95,16 +94,9 @@
                                          update="frmMotoGp,:grwErrores"/>  
                     </p:panelGrid>
 
-
-
-
                 </p:panel>
-                
-
 
             </center>
-
-
 
         </h:form>
     </h:body>
