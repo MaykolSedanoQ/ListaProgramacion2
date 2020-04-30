@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package login.Bean;
+package login;
 
 import com.listase.utilidades.JsfUtil;
-import java.io.Serializable;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.SessionScoped;
+import java.io.Serializable;
 import login.controlador.ControladorUsuarios;
 import login.modelo.Usuario;
 
@@ -16,9 +16,9 @@ import login.modelo.Usuario;
  *
  * @author Maykol Sedano
  */
-@Named(value = "loginBean")
-@Dependent
-public class LoginBean implements Serializable {
+@Named(value = "sesionBean")
+@SessionScoped
+public class SesionBean implements Serializable {
 
     //atributo para ocultar o visualizar el login
     private boolean verPanelDelLogin = false;
@@ -30,7 +30,7 @@ public class LoginBean implements Serializable {
     private ControladorUsuarios controlUsuarios;
     private Usuario usuarioAutenticado;
 
-    public LoginBean() {
+    public SesionBean() {
         controlUsuarios = new ControladorUsuarios();
     }
 
@@ -95,3 +95,4 @@ public class LoginBean implements Serializable {
     }
 
 }
+

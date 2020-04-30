@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 public class Nodo implements Serializable{
     private Infante dato;
-    private Nodo siguiente;
+    public Nodo siguiente;
 
     public Nodo(Infante dato) {
         this.dato = dato;

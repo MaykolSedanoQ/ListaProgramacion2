@@ -262,4 +262,6 @@ es el código a eliminar digo que cabeza=cabeza.siguiente si,no llamó al ayudan
         throw new InfanteExcepcion("La lista de infantes está vacía");
     }
     
+
+    
 }

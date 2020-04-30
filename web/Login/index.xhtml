@@ -6,10 +6,13 @@
     <h:head>
         <title>Facelet Title</title>
     </h:head>
+    
     <h:body>
         <p:growl id="grwlErrores"/>
         <h:form id="frmLogin">
-            <p:commandButton value="Ocultar/mostrar" action="#{loginBean.habilitarOdeshabilitarLogin()}" 
+            
+            <center>
+                 <p:commandButton value="Ocultar/mostrar" action="#{loginBean.habilitarOdeshabilitarLogin()}" 
                              update="pnlLogin" immediate="true"   />
 
             <h:panelGroup id="pnlLogin" >
@@ -28,8 +31,8 @@
  
                 </p:panel>
             </h:panelGroup>
+            </center>
 
-         
         </h:form>
 
 

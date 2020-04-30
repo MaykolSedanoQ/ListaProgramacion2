@@ -443,7 +443,65 @@ public class SesionInfanteDE implements Serializable {
         }
     }
     
- 
+ //adelantar posicion}
+    public void Adelantar(NodoDE temp, int posAd) {
+        int cont = 0;
+        NodoDE tempA = temp;
+
+        //mientras que
+        while ((cont < posAd) && (tempA != null)) {
+            tempA = temp;
+            cont++;
+        }//fin del mientras que
+
+        //Inicio del si
+        if (tempA != null) {
+            tempA = temp.getSiguiente();
+            cont = 0;
+            //inicio del mientras que
+            Nodo tempIn= new Nodo(infante);
+
+            while (cont < posAd) {
+                tempIn.setDato(tempA.getDato());
+                tempA.setDato(temp.getDato());
+                temp.setDato(tempIn.getDato());
+                tempA = tempA.getSiguiente();
+                temp = temp.getSiguiente();
+                cont++;
+            }//fin del mientras que
+
+        }//fin del si
+    }
+    
+    //perder poos
+    public void PerderPos(NodoDE temp, int posAd) {
+        int cont = 0;
+        NodoDE tempA = temp;
+
+        //mientras que
+        while ((cont < posAd) && (tempA != null)) {
+            tempA = temp;
+            cont++;
+        }//fin del mientras que
+
+        //Inicio del si
+        if (tempA != null) {
+            tempA = temp.getAnterior();
+            cont = 0;
+            //inicio del mientras que
+            Nodo tempIn= new Nodo(infante);
+
+            while (cont < posAd) {
+                tempIn.setDato(tempA.getDato());
+                tempA.setDato(temp.getDato());
+                temp.setDato(tempIn.getDato());
+                tempA = tempA.getAnterior();
+                temp = temp.getAnterior();
+                cont++;
+            }//fin del mientras que
+
+        }//fin del si
+    }
     
     
 }
