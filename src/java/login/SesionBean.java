@@ -87,7 +87,7 @@ public class SesionBean implements Serializable {
             //encontro el usuario y compara
             if (usuarioEncontrado.getContrasenia().equals(contrasenia)) {
                 usuarioAutenticado = usuarioEncontrado;
-                return "inicioListas.xhtml";
+                return "inicioListas";
             }
         }
         JsfUtil.addErrorMessage("Los datos ingresados no son validos");

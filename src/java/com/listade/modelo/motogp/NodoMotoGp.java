@@ -10,22 +10,22 @@ package com.listade.modelo.motogp;
  * @author carloaiza
  */
 public class NodoMotoGp {
-    private CorredoresMotoGp dato;
+    private CorredorMotoGp dato;
     private NodoMotoGp siguiente;
     private NodoMotoGp anterior;
     
     //constructor vacio
 
-    public NodoMotoGp(CorredoresMotoGp dato) {
+    public NodoMotoGp(CorredorMotoGp dato) {
         this.dato = dato;
     }
     //get y set
 
-    public CorredoresMotoGp getDato() {
+    public CorredorMotoGp getDato() {
         return dato;
     }
 
-    public void setDato(CorredoresMotoGp dato) {
+    public void setDato(CorredorMotoGp dato) {
         this.dato = dato;
     }
 

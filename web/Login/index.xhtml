@@ -12,21 +12,19 @@
         <h:form id="frmLogin">
             
             <center>
-                 <p:commandButton value="Ocultar/mostrar" action="#{loginBean.habilitarOdeshabilitarLogin()}" 
-                             update="pnlLogin" immediate="true"   />
 
             <h:panelGroup id="pnlLogin" >
-                <p:panel  rendered="#{loginBean.verPanelDelLogin}"  header="Login">
+                <p:panel  rendered="#{sesionBean.verPanelDelLogin}"  header="Login">
                     <p:panelGrid columns="2">
                         <p:outputLabel for="txtCorreo"  value="Correo:"/>
                         <p:inputText id="txtCorreo" required="true"
-                                     value="#{loginBean.correo}"/>
+                                     value="#{sesionBean.correo}"/>
                         <p:outputLabel for="txtPassword" value="Contraseña:"/>
                         <p:password id="txtPassword" required="true"
-                                     value="#{loginBean.contrasenia}"/>                        
+                                    value="#{sesionBean.contrasenia}"/>                        
                     </p:panelGrid>
                     <p:commandButton value="Ingresar"
-                                     action="#{loginBean.ingresar()}"
+                                     action="#{sesionBean.ingresar()}"
                                      update="@all"/>
  
                 </p:panel>

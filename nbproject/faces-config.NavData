@@ -3,11 +3,11 @@
     <Scope Scope="Faces Configuration Only"/>
     <Scope Scope="Project">
         <Node id="inicioListas.xhtml" x="150" y="300" zoom="false"/>
-        <Node id="motoGp/index.xhtml" x="150" y="150" zoom="true"/>
-        <Node id="Login/index.xhtml" x="650" y="150" zoom="true"/>
         <Node id="*" x="435" y="278" zoom="true"/>
+        <Node id="Login/index.xhtml" x="650" y="150" zoom="true"/>
         <Node id="listade/index.xhtml" x="400" y="150" zoom="true"/>
         <Node id="ListaSE/index.xhtml" x="150" y="450" zoom="true"/>
+        <Node id="motoGp/indexMotoGp.xhtml" x="150" y="150" zoom="true"/>
     </Scope>
     <Scope Scope="All Faces Configurations"/>
 </Scene>

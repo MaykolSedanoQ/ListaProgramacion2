@@ -37,6 +37,7 @@
         </style>
     </h:head>
     <h:body>
+         <p:growl id="grwlErrores"/>
         <h:form id="frmMotoGp">
             <p:commandButton value="Volver" action="inicio"/>
             <center>
@@ -62,12 +63,15 @@
                                      value="#{sesionMotoGp.corredores.nombreEquipo}"/>
                     </p:panelGrid>
 
-                    <p:commandButton value="Nuevo Piloto" update="pnlMotoGp"
+                    <p:commandButton value="Nuevo Piloto" update="frmMotoGp,:grwlErrores"
                                      action="#{sesionMotoGp.hablitarFormularioPiloto()}"
-                                     disabled="#{!sesionMotoGp.desahabilitarFormulario}"/>
+                                     disabled="#{!sesionMotoGp.desahabilitarFormulario}">
+                        
+                    </p:commandButton>
 
-                    <p:commandButton value="Guardar Piloto" update="pnlMotoGp"
-                                     action="#{sesionMotoGp.guardarPilotos()}"/>
+                    <p:commandButton value="Guardar Piloto" update="frmMotoGp,:grwlErrores"
+                                     action="#{sesionMotoGp.guardarPilotos()}"
+                                     disabled="#{sesionMotoGp.desahabilitarFormulario}"/>
 
                     <p:panelGrid columns="2">
                         <p:commandButton value="Primer Piloto" 
@@ -91,7 +95,7 @@
                         <p:inputText value="#{sesionMotoGp.numeroDelPilotoAEliminar}" 
                                      maxlength="4" size="10"/>
                         <p:commandButton value="Eliminar Piloto" action="#{sesionMotoGp.eliminarPiloto()}"
-                                         update="frmMotoGp,:grwErrores"/>  
+                                         update="frmMotoGp"/>  
                     </p:panelGrid>
 
                 </p:panel>

@@ -22,3 +22,5 @@
         <welcome-file>faces/inicioListas.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>
+
+

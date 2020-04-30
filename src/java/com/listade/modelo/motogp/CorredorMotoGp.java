@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author Maykol Sedano
  */
-public class CorredoresMotoGp implements Serializable{
+public class CorredorMotoGp implements Serializable{
     private String nombre;
     private  byte edad;
     private short numeroPiloto;
@@ -20,13 +20,13 @@ public class CorredoresMotoGp implements Serializable{
     
     //constructor vacio
 
-    public CorredoresMotoGp() {
+    public CorredorMotoGp() {
         this.edad=1;
     }
     
     //constructor lleno
 
-    public CorredoresMotoGp(String nombre, byte edad, short numeroPiloto, String ciudadNacimiento, String nombreEquipo) {
+    public CorredorMotoGp(String nombre, byte edad, short numeroPiloto, String ciudadNacimiento, String nombreEquipo) {
         this.nombre = nombre;
         this.edad = edad;
         this.numeroPiloto = numeroPiloto;

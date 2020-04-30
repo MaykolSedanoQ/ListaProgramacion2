@@ -38,7 +38,7 @@ public class ListaMotoGp implements Serializable {
     
 
     //metodo adiccionar el piloto
-    public void adicionarPiloto(CorredoresMotoGp corredor) {
+    public void adicionarPiloto(CorredorMotoGp corredor) {
 
         if (cabeza == null) {
             cabeza = new NodoMotoGp(corredor);
@@ -54,7 +54,7 @@ public class ListaMotoGp implements Serializable {
     //fin del metodo de adiccionar piloto
 
     //metodo adiccionar un piloto al inicio
-    public void adiccionarPilotoAlInicio(CorredoresMotoGp corredor) {
+    public void adiccionarPilotoAlInicio(CorredorMotoGp corredor) {
 
         if (cabeza == null) {
             cabeza = new NodoMotoGp(corredor);
@@ -104,7 +104,7 @@ public class ListaMotoGp implements Serializable {
     }
     
     public List obtenerListaPilotos(){
-        List<CorredoresMotoGp> listado = new ArrayList<>();
+        List<CorredorMotoGp> listado = new ArrayList<>();
         
         listaPilotos(listado);
         return listado;
@@ -165,7 +165,7 @@ public  void eliminarPiloto(short numeroPiloto )throws PilotosExcepcion{
     throw new PilotosExcepcion("La lista de los pilotos esta vacia");
 }
 
-     public CorredoresMotoGp obtenerPiloto (short numeroPiloto ) throws PilotosExcepcion
+     public CorredorMotoGp obtenerPiloto (short numeroPiloto ) throws PilotosExcepcion
     {
         if(cabeza !=null)
         {
