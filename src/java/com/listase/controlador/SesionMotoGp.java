@@ -69,12 +69,7 @@ public class SesionMotoGp implements Serializable {
     public int getNumeroPosiciones() {
         return numeroPosiciones;
     }
-
-    //get y set
-    public void setNumeroPosiciones(int numeroPosiciones) {    
-        this.numeroPosiciones = numeroPosiciones;
-    }
-
+    
     public ListaMotoGp getListaPilotos() {
         return listaPilotos;
     }
@@ -83,12 +78,12 @@ public class SesionMotoGp implements Serializable {
         this.listaPilotos = listaPilotos;
     }
 
-    public CorredorMotoGp getCorredores() {
+    public CorredorMotoGp getCorredor() {
         return corredor;
     }
 
-    public void setCorredores(CorredorMotoGp corredores) {
-        this.corredor = corredores;
+    public void setCorredor(CorredorMotoGp corredor) {
+        this.corredor = corredor;
     }
 
     public String getAlInicio() {
@@ -159,7 +154,8 @@ public class SesionMotoGp implements Serializable {
         return pilotoDiagrama;
     }
 
-    public void setPilotoDiagrama(CorredorMotoGp pilotoDiagrama) {
+    //get y set
+    public void setPilotoDiagrama(CorredorMotoGp pilotoDiagrama) {    
         this.pilotoDiagrama = pilotoDiagrama;
     }
 

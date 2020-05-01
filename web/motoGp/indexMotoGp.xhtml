@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
         <style type="text/css">
@@ -41,26 +42,26 @@
         <h:form id="frmMotoGp">
             <p:commandButton value="Volver" action="inicio"/>
             <center>
-                <p:panel id="pnlMotoGp" header="Moto Gp" />  
+                <p:panel header="Moto Gp" />  
                 <p:panel header="Datos de los pilotos">
                     <p:panelGrid columns="2">
                         <p:outputLabel for="txtNombre" value="Nombre Del Piloto"/>
                         <p:inputText id="txtNombre" required="true" disabled="#{sesionMotoGp.desahabilitarFormulario}"
-                                     value="#{sesionMotoGp.corredores.nombre}"/>
+                                     value="#{sesionMotoGp.corredor.nombre}"/>
                         <p:outputLabel for="spEdad" value="Edad Del Pitlo"/>
                         <p:spinner id="spEdad" required="true" min="13" max="50"
-                                   disabled="#{sesionMotoGp.desahabilitarFormulario}" value="#{sesionMotoGp.corredores.edad}"/>
+                                   disabled="#{sesionMotoGp.desahabilitarFormulario}" value="#{sesionMotoGp.corredor.edad}"/>
                         <p:outputLabel for="txtNacionalidad" value="Pais De Nacimiento"/>
                         <p:inputText id="txtNacionalidad" required="true" 
-                                     disabled="#{sesionMotoGp.desahabilitarFormulario}" value="#{sesionMotoGp.corredores.ciudadNacimiento}"/>
+                                     disabled="#{sesionMotoGp.desahabilitarFormulario}" value="#{sesionMotoGp.corredor.ciudadNacimiento}"/>
                         <p:outputLabel for="spNumeroPiloto" value="Numero Del Piloto"/>
                         <p:spinner id="spNumeroPiloto" required="true"
                                    disabled="#{sesionMotoGp.desahabilitarFormulario}" 
-                                   value="#{sesionMotoGp.corredores.numeroPiloto}"/>
+                                   value="#{sesionMotoGp.corredor.numeroPiloto}"/>
                         <p:outputLabel for="txtEquipo" value="Nombre Del Equipo"/>
                         <p:inputText id="txtEquipo" required="true" 
                                      disabled="#{sesionMotoGp.desahabilitarFormulario}"
-                                     value="#{sesionMotoGp.corredores.nombreEquipo}"/>
+                                     value="#{sesionMotoGp.corredor.nombreEquipo}"/>
                     </p:panelGrid>
 
                     <p:commandButton value="Nuevo Piloto" update="frmMotoGp,:grwlErrores"
@@ -97,11 +98,83 @@
                         <p:commandButton value="Eliminar Piloto" action="#{sesionMotoGp.eliminarPiloto()}"
                                          update="frmMotoGp"/>  
                     </p:panelGrid>
+                    
 
                 </p:panel>
 
             </center>
+            
+            <p:panel header="Carrera" id="pnlVista" style="width: 100%">
+                <p:commandButton value="#{sesionMotoGp.textoVista}"
+                                 action="#{sesionMotoGp.cambiarVistaPiloto()}"
+                                 update="pnlVista"/>
+                <p:dataTable rendered="#{sesionMotoGp.textoVista=='Grafico'}"
+                             value="#{sesionMotoGp.listadoPilotos}"
+                             var="inf">
+                    <p:column>
+                        <f:facet name="header">
+                            <p:outputLabel value="Nombre"/>
+                        </f:facet>
+                        <p:outputLabel value="#{inf.nombre}"/>
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <p:outputLabel value="Edad"/>
+                        </f:facet>
+                        <p:outputLabel value="#{inf.edad}"/>
+                    </p:column>
+                    
+                     <p:column>
+                        <f:facet name="header">
+                            <p:outputLabel value="Nacionalidad"/>
+                        </f:facet>
+                        <p:outputLabel value="#{inf.ciudadNacimiento}"/>
+                    </p:column>
+                    
+                     <p:column>
+                        <f:facet name="header">
+                            <p:outputLabel value="Numero Del Piloto"/>
+                        </f:facet>
+                        <p:outputLabel value="#{inf.numeroPiloto}"/>
+                    </p:column>
+                   
+                    <p:column>
+                        <f:facet name="header">
+                            <p:outputLabel value="Nombre Del Equipo"/>
+                        </f:facet>
+                        <p:outputLabel value="#{inf.nombreEquipo}"/>
+                    </p:column>
+             
+                </p:dataTable>
+                
+                 <p:diagram id="diagrama" 
+                            rendered="#{sesionMotoGp.textoVista=='Tabla'}"
+                            value="#{sesionMotoGp.model}" 
+                            style="height:600px; width: 100%;"  
+                            styleClass="ui-widget-content" />
+            
+                 <p:remoteCommand name="elementClickRight"
+                                  actionListener="#{sesionMotoGp.onClickRight()}">
+                 </p:remoteCommand>
+            
+                  <script>
+                        $(document).ready(function () {
+                            $('.ui-diagram > .ui-diagram-element').mousedown(function (info) {
+                                if (info.which === 3) {
+                                    elementClickRight([{
+                                            name: 'elementId',
+                                            value: info.target.id
+                                        }]);
+                                }
+                            });
+                        });
+                    </script>
+            
+            </p:panel>
 
+            
+            
         </h:form>
     </h:body>
 
