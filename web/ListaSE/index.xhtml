@@ -104,6 +104,13 @@
                         <p:commandButton value="Eliminar" action="#{sesionInfante.eliminarInfante()}" 
                                          update="frmInfante,:grwlErrores"
                                          />
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Adelantar posiciones"/>
+                            <p:inputText value="#{sesionInfante.infanteSeleccionado}" 
+                                     maxlength="4" size="10"/>
+                            <p:commandButton value="Adelantar" action="#{sesionInfante.Adelantar(temp, posAd)}"
+                                         update="frmInfante,:grwlErrores"/>
+                        </p:panelGrid>
                     </p:panel>
                     <p:panel header="Reportes">
                         <p:outputLabel value="Promedio de Edad de los infantes: #{sesionInfante.listaInfantes.promediarEdades()}"/>

@@ -444,7 +444,7 @@ public class SesionInfanteDE implements Serializable {
     }
     
  //adelantar posicion}
-    public void Adelantar(NodoDE temp, int posAd) {
+    public void adelantarPos(NodoDE temp, int posAd) {
         int cont = 0;
         NodoDE tempA = temp;
 
@@ -459,7 +459,7 @@ public class SesionInfanteDE implements Serializable {
             tempA = temp.getSiguiente();
             cont = 0;
             //inicio del mientras que
-            Nodo tempIn= new Nodo(infante);
+            NodoDE tempIn= new NodoDE(infante);
 
             while (cont < posAd) {
                 tempIn.setDato(tempA.getDato());
@@ -474,7 +474,7 @@ public class SesionInfanteDE implements Serializable {
     }
     
     //perder poos
-    public void PerderPos(NodoDE temp, int posAd) {
+    public void perderPos(NodoDE temp, int posAd) {
         int cont = 0;
         NodoDE tempA = temp;
 
@@ -489,7 +489,7 @@ public class SesionInfanteDE implements Serializable {
             tempA = temp.getAnterior();
             cont = 0;
             //inicio del mientras que
-            Nodo tempIn= new Nodo(infante);
+            NodoDE tempIn= new NodoDE(infante);
 
             while (cont < posAd) {
                 tempIn.setDato(tempA.getDato());

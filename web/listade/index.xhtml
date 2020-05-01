@@ -106,6 +106,24 @@
                         <p:commandButton value="Eliminar" action="#{sesionInfanteDE.eliminarInfante()}" 
                                          update="frmInfante,:grwlErrores"
                                          />
+                        
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Adelantar posiciones"/>
+                        <p:inputText value="#{sesionInfanteDE.infanteSeleccionado}" 
+                                     maxlength="4" size="10"/>
+                        <p:commandButton value="Adelantar" action="#{sesionInfanteDE.adelantarPos(temp, posAd)}"
+                                         update="frmInfante,:grwlErrores"/>
+                        </p:panelGrid>
+                        
+                        <p:panelGrid columns="2">
+                             <p:outputLabel value="Perder posiciones"/>
+                        <p:inputText value="#{sesionInfanteDE.infanteSeleccionado}" 
+                                     maxlength="4" size="10"/>
+                        <p:commandButton value="Adelantar" action="#{sesionInfanteDE.perderPos(temp, posAd)}"
+                                         update="frmInfante,:grwlErrores"/>
+                        </p:panelGrid>
+                       
+                        
                     </p:panel>
                     <p:panel header="Reportes">
                         <p:outputLabel value="Promedio de Edad de los infantes: #{sesionInfanteDE.listaInfantes.promediarEdades()}"/>

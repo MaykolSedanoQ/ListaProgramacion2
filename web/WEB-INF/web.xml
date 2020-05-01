@@ -19,7 +19,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/inicioListas.xhtml</welcome-file>
+        <welcome-file>faces/login/index.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>
 
