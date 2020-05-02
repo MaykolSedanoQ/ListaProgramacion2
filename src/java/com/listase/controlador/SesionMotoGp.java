@@ -173,7 +173,7 @@ public class SesionMotoGp implements Serializable {
     //metodos
     //guardar un piloto nuevo
     public void guardarPilotos() {
-        corredor.setNumeroPiloto((short) (listaPilotos.contarPilotos() + 1));
+        //corredor.setNumeroPiloto((short) (listaPilotos.contarPilotos() + 1));
         if (alInicio.compareTo("1") == 0) {
             listaPilotos.adiccionarPilotoAlInicio(corredor);
         } else {

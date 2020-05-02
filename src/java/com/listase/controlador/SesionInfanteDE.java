@@ -367,7 +367,7 @@ public class SesionInfanteDE implements Serializable {
 
     public void eliminarInfante()
     {
-        if(codigoEliminar >0)
+        if(codigoEliminar >-+0)
         {
             //llamo el eliminar de la lista
             try{
@@ -502,6 +502,9 @@ public class SesionInfanteDE implements Serializable {
 
         }//fin del si
     }
+    
+    
+    
     
     
 }

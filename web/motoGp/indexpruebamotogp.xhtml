@@ -181,7 +181,7 @@
                                    targetFilter=".ui-diagram-element">
                         <p:menuitem value="Ver Datos Del Piloto"
                                     action="#{sesionMotoGp.obtenerDiagramaPilotos()}"
-                                    oncomplete="PF('dlgDatosPilotos').show();"/>
+                                    oncomplete="PF('dlgDatosInfante').show();"/>
                         
                         <p:menuitem value="Enviar Piloto a la primera posicion" update="pnlVista"
                                  action="#{sesionMotoGp.enviarPilotoPrimeraPos()}"/>
@@ -196,27 +196,22 @@
 
             </p:panel> <!--panel del final-->
             
-            <p:dialog id="modalPiloto" header="Datos Del Piloto"
-                      widgetVar="dlgDatosPiloto"
-                modal="true" height="100">
-                <p:panel id="panelPiloto">
-                    <h:outputText value="Nombre"/>
-                    <h:outputText value="#{sesionMotoGp.corredor.nombre}"/>
-                    <h:outputText value="Edad"/>
-                        <h:outputText value="#{sesionMotoGp.corredor.edad}"/>
-                        
-                        <h:outputText value="Nacionalidad"/>
-                        <h:outputText value="#{sesionMotoGp.corredor.ciudadNacimiento}"/>
-                        
-                        <h:outputText value="Numero Del Piloto"/>
-                        <h:outputText value="#{sesionMotoGp.corredor.numeroPiloto}"/>
-                        
-                        <h:outputText value="Nombre Del Equipo"/>
-                        <h:outputText value="#{sesionMotoGp.corredor.nombreEquipo}"/>
-                </p:panel>          
-                
-                
-            </p:dialog>
+            <p:dialog id="modalInfante" header="Datos dell Piloto" widgetVar="dlgDatosInfante" 
+                      modal="true" height="100">
+                <p:panel id="panelInfante">
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Numero Piloto" />
+                        <h:outputText value="#{sesionMotoGp.pilotoDiagrama.numeroPiloto}" />
+                        <h:outputText value="Nombre del piloto:" />
+                        <h:outputText value="#{sesionMotoGp.pilotoDiagrama.nombre}" />
+                        <h:outputText value="Edad del piloto:" />
+                        <h:outputText value="#{sesionMotoGp.pilotoDiagrama.edad}" />
+                        <h:outputText value="Pais de nacimiento:" />
+                        <h:outputText value="#{sesionMotoGp.pilotoDiagrama.ciudadNacimiento}" />
+                    </h:panelGrid>
+                    
+                </p:panel>
+            </p:dialog> 
                       
             
 

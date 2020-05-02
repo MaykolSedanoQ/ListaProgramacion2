@@ -107,21 +107,7 @@
                                          update="frmInfante,:grwlErrores"
                                          />
                         
-                        <p:panelGrid columns="2">
-                            <p:outputLabel value="Adelantar posiciones"/>
-                        <p:inputText value="#{sesionInfanteDE.infanteSeleccionado}" 
-                                     maxlength="4" size="10"/>
-                        <p:commandButton value="Adelantar" action="#{sesionInfanteDE.adelantarPos(temp, posAd)}"
-                                         update="frmInfante,:grwlErrores"/>
-                        </p:panelGrid>
-                        
-                        <p:panelGrid columns="2">
-                             <p:outputLabel value="Perder posiciones"/>
-                        <p:inputText value="#{sesionInfanteDE.infanteSeleccionado}" 
-                                     maxlength="4" size="10"/>
-                        <p:commandButton value="Adelantar" action="#{sesionInfanteDE.perderPos(temp, posAd)}"
-                                         update="frmInfante,:grwlErrores"/>
-                        </p:panelGrid>
+                       
                        
                         
                     </p:panel>
@@ -214,7 +200,29 @@
                         <p:menuitem value="Enviar al inicio" update="pnlVista"                                    
                                     action="#{sesionInfanteDE.enviarAlInicio()}"                                    
                                     />
-                        <p:menuitem value="Adelantar/Perder Posición"/>
+                        <p:menuitem value="Adelantar/Perder Posición">
+                            
+                                    <p:dialog id="modaladelantarInfante" header="Adelantar/ Perder posicion" widgetVar="dlgposicionInfante" 
+                      modal="true" height="200">
+                <p:panel id="panelposicionInfante">
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Código:" />
+                        <h:outputText value="#{sesionInfanteDE.infanteDiagrama.codigo}" />
+                        <h:outputText value="Nombre:" />
+                        <h:outputText value="#{sesionInfanteDE.infanteDiagrama.nombre}" />
+                        <p:spinner id="spPosicionPiloto" required="true" min="-32767" max="32767" 
+                                   value="#{sesionInfanteDE.adelantarPos(temp, posAd)}"/>
+                                     
+                    </h:panelGrid>
+                    
+                    <p:commandButton value="Aceptar" update="pnlVista,:grwlErrores"
+                                     action="#{sesionInfanteDE.adelantarPos(temp, posAd)}"/>
+                     <p:commandButton value="Cancelar" onclick="PF('dlgposicionInfante').hide();"/>
+                </p:panel>
+            </p:dialog>
+
+                        </p:menuitem>
+                                                                
                     </p:contextMenu>
                 </p:panel>
             </p:panel>
