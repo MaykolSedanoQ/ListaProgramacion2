@@ -57,6 +57,17 @@ public class SesionInfanteDE implements Serializable {
     
     private Infante infanteDiagrama;
     
+    private short moverInfanteCantidad;
+    
+    private Infante infanteMenorEdad;
+    
+    private Infante posicionInfante;
+    
+    private int posInfante;
+    private String opcionElegida="1";
+    private  int  numeroPosicion=1;
+    private short posicionBuscar;
+    private short codInfante;
     /**
      * Creates a new instance of SesionInfante
      */
@@ -87,12 +98,54 @@ public class SesionInfanteDE implements Serializable {
         pintarLista();
    }
 
+    public Infante getPosicionInfante() {
+        return posicionInfante;
+    }
+
+    public void setPosicionInfante(Infante posicionInfante) {
+        this.posicionInfante = posicionInfante;
+    }
+
+    public String getOpcionElegida() {
+        return opcionElegida;
+    }
+
+    public void setOpcionElegida(String opcionElegida) {
+        this.opcionElegida = opcionElegida;
+    }
+
+    public int getNumeroPosicion() {
+        return numeroPosicion;
+    }
+
+    public void setNumeroPosicion(int numeroPosicion) {
+        this.numeroPosicion = numeroPosicion;
+    }
+
+    
+    
+    public short getPosicionBuscar() {
+        return posicionBuscar;
+    }
+
+    public void setPosicionBuscar(short posicionBuscar) {
+        this.posicionBuscar = posicionBuscar;
+    }
+
     public Infante getInfanteDiagrama() {
         return infanteDiagrama;
     }
 
     public void setInfanteDiagrama(Infante infanteDiagrama) {
         this.infanteDiagrama = infanteDiagrama;
+    }
+
+    public short getCodInfante() {
+        return codInfante;
+    }
+
+    public void setCodInfante(short codInfante) {
+        this.codInfante = codInfante;
     }
     
     
@@ -116,7 +169,7 @@ public class SesionInfanteDE implements Serializable {
     }
 
     
-    
+  
     public ControladorLocalidades getControlLocalidades() {
         return controlLocalidades;
     }
@@ -211,8 +264,7 @@ public class SesionInfanteDE implements Serializable {
     
     
     //metodos
-    
-    public void guardarInfante()
+       public void guardarInfante()
     {
         //obtiene el consecutivo
         infante.setCodigo((short)(listaInfantes.contarNodos()+1));
@@ -502,6 +554,129 @@ public class SesionInfanteDE implements Serializable {
 
         }//fin del si
     }
+    
+    
+    public void actualizarMenorEdad() throws InfanteExcepcion{
+        byte menorEdad= 0 ;
+        String nombreEdad="";
+        nombreEdad= listaInfantes.obtenerMenorEdad();
+        NodoDE temp =   listaInfantes.getCabeza();
+        while(temp!=null){
+            if (temp.getDato().getEdad() == menorEdad) {
+                infanteMenorEdad= temp.getDato();
+                
+                
+                
+            }
+           
+            temp= temp.getSiguiente();
+       
+        }
+        
+    }
+    
+     public void guardarInfantePos()
+    {
+         infante.setCodigo((short)(listaInfantes.contarNodos()+1));
+        try {
+             if(alInicio.compareTo("1")==0)
+        {
+            listaInfantes.adicionarPosicion(posicionBuscar,infante);
+        }
+        else
+        {
+            listaInfantes.adicionarNodo(infante);
+        }  
+        //Vuelvo a llenar la lista para la tabla
+        listadoInfantes = listaInfantes.obtenerListaInfantes();
+        pintarLista();
+        deshabilitarFormulario=true;
+        JsfUtil.addSuccessMessage("El infante se ha guardado exitosamente");
+        } catch (Exception e) {
+               JsfUtil.addErrorMessage("no se puede");
+        }
+        //obtiene el consecutivo
+       
+       
+        
+    }
+
+     public void retornarPosicion(){
+         
+             if(codInfante >-+0)   {
+            //llamo el eliminar de la lista
+            try{
+                
+                JsfUtil.addSuccessMessage(" la posicion del Infante es "+ listaInfantes.obtenerPosicion(codInfante));
+            }
+            catch(InfanteExcepcion e)
+            {
+                JsfUtil.addErrorMessage(e.getMessage());
+            }
+        }
+        else
+        {
+            JsfUtil.addErrorMessage("no existe");
+        }
+    }
+     
+     public void obtenerPosicionInfante()
+    {
+        try {
+            posInfante = listaInfantes.obtenerPosicionInfante(infanteSeleccionado);
+        } catch (InfanteExcepcion ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
+    }
+    
+     
+     public void cambiarPosicion()
+    {
+        boolean bandera=false;
+        int posicionFinal=0;
+        switch(opcionElegida)
+        {
+            //Ganar
+            case "1":
+                if(numeroPosicion <= (posInfante-1) )
+                {
+                    bandera=true;
+                    posicionFinal = posInfante - numeroPosicion;
+                }
+                break;
+            //Perder
+            case "0":
+                if(numeroPosicion <= (listaInfantes.contarNodos()-posInfante))
+                {
+                    bandera=true;
+                    posicionFinal = posInfante + numeroPosicion;
+                }
+                break;
+        }
+        
+        if(bandera)
+        {
+            try {
+                //Realizaria la función de insertar
+                Infante datosInfante = listaInfantes.obtenerInfante(infanteSeleccionado);
+                // cambia la cantidad de infantes
+                listaInfantes.eliminarInfante(infanteSeleccionado);
+                listaInfantes.adicionarNodoPosicion(posicionFinal, datosInfante);
+                irPrimero();
+                JsfUtil.addSuccessMessage("Se ha realizado el cambio");
+                
+                
+            } catch (InfanteExcepcion ex) {
+               JsfUtil.addErrorMessage(ex.getMessage());
+            }
+            
+        }
+        else
+        {
+            JsfUtil.addErrorMessage("El número de posiciones no es válido para el infante dado");
+        }
+    }
+
     
     
     

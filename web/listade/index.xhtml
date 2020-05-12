@@ -75,6 +75,8 @@
                             </p:selectOneMenu>
 
 
+
+
                             <p:outputLabel value="Al inicio"/>
                             <p:selectOneMenu value="#{sesionInfanteDE.alInicio}" disabled="#{sesionInfanteDE.deshabilitarFormulario}">
                                 <f:selectItem itemLabel="SI" itemValue="1"/>
@@ -106,10 +108,20 @@
                         <p:commandButton value="Eliminar" action="#{sesionInfanteDE.eliminarInfante()}" 
                                          update="frmInfante,:grwlErrores"
                                          />
-                        
-                       
-                       
-                        
+
+                        <p:outputLabel value="Posicion para insertar: "/>
+                        <p:inputText value="#{sesionInfanteDE.posicionBuscar}" maxlength="4" size="10"/>
+                        <p:commandButton value="Posicion" action="#{sesionInfanteDE.guardarInfantePos()}" 
+                                         update="frmInfante,:grwlErrores"
+                                         />
+
+                        <br>
+                            <p:outputLabel value="Buscar por posicion: "/>
+                            <p:inputText value="#{sesionInfanteDE.codInfante}" maxlength="4" size="10"/>
+                            <p:commandButton value="Codigo a buscar" action="#{sesionInfanteDE.retornarPosicion()}" 
+                                             update="frmInfante,:grwlErrores"
+                                             />                        </br>
+
                     </p:panel>
                     <p:panel header="Reportes">
                         <p:outputLabel value="Promedio de Edad de los infantes: #{sesionInfanteDE.listaInfantes.promediarEdades()}"/>
@@ -121,7 +133,11 @@
                             <p:outputLabel value="#{sesionInfanteDE.listaInfantes.contarInfantesxGenero(true)}"/>               
                             <p:outputLabel value="Cantidad Niñas: "/>
                             <p:outputLabel value="#{sesionInfanteDE.listaInfantes.contarInfantesxGenero(false)}"/>
+                            <p:outputLabel value="Menor edad:"/>
+                            <p:outputLabel value="#{sesionInfanteDE.listaInfantes.obtenerMenorEdad()}"
+                                           />
                         </h:panelGrid>
+
                     </p:panel>
 
 
@@ -200,33 +216,20 @@
                         <p:menuitem value="Enviar al inicio" update="pnlVista"                                    
                                     action="#{sesionInfanteDE.enviarAlInicio()}"                                    
                                     />
-                        <p:menuitem value="Adelantar/Perder Posición">
-                            
-                                    <p:dialog id="modaladelantarInfante" header="Adelantar/ Perder posicion" widgetVar="dlgposicionInfante" 
-                      modal="true" height="200">
-                <p:panel id="panelposicionInfante">
-                    <h:panelGrid columns="2">
-                        <h:outputText value="Código:" />
-                        <h:outputText value="#{sesionInfanteDE.infanteDiagrama.codigo}" />
-                        <h:outputText value="Nombre:" />
-                        <h:outputText value="#{sesionInfanteDE.infanteDiagrama.nombre}" />
-                        <p:spinner id="spPosicionPiloto" required="true" min="-32767" max="32767" 
-                                   value="#{sesionInfanteDE.adelantarPos(temp, posAd)}"/>
-                                     
-                    </h:panelGrid>
-                    
-                    <p:commandButton value="Aceptar" update="pnlVista,:grwlErrores"
-                                     action="#{sesionInfanteDE.adelantarPos(temp, posAd)}"/>
-                     <p:commandButton value="Cancelar" onclick="PF('dlgposicionInfante').hide();"/>
-                </p:panel>
-            </p:dialog>
 
-                        </p:menuitem>
-                                                                
+                        <p:menuitem value="Adelantar/Perder Posición"
+                                    action="#{sesionInfanteDE.obtenerPosicionInfante()}"
+                                    update="panelGestionPosicion"                                    
+                                    oncomplete="PF('dlgGestionPosicionInfante').show();"/>
+                         
+
+
+                     
+
                     </p:contextMenu>
                 </p:panel>
             </p:panel>
-            
+
             <p:dialog id="modalInfante" header="Datos Infante" widgetVar="dlgDatosInfante" 
                       modal="true" height="100">
                 <p:panel id="panelInfante">
@@ -243,9 +246,32 @@
                         <h:outputText value="Ciudad De Nacimiento:" />
                         <h:outputText value="#{sesionInfanteDE.infanteDiagrama.ciudadNacimiento}" />
                     </h:panelGrid>
-                    
+
                 </p:panel>
             </p:dialog> 
+            
+              <p:dialog id="gestionPosicionInfante" header="Adelantar/perder posición infante" 
+                      widgetVar="dlgGestionPosicionInfante"
+                modal="true" height="150">                          
+                <h:panelGroup id="panelGestionPosicion">
+                    <h:panelGrid columns="2">
+                        <p:outputLabel value="Posición Actual"/>
+                        <p:outputLabel value="#{sesionInfanteDE.posicionInfante}"/>
+                        <p:outputLabel value="Acción"/>
+                        <p:selectOneMenu value="#{sesionInfanteDE.opcionElegida}">
+                            <f:selectItem itemLabel="Ganar" itemValue="1"/>
+                            <f:selectItem itemLabel="Perder" itemValue="0"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Número posiciones"/>
+                        <p:spinner min="1" value="#{sesionInfanteDE.numeroPosicion}"/>
+                    </h:panelGrid>
+                    <p:commandButton value="Aplicar" action="#{sesionInfanteDE.cambiarPosicion()}"
+                                     onclick="PF('dlgGestionPosicionInfante').hide();"
+                                     ajax="false"
+                                      update="pnlVista"/>
+                    
+                </h:panelGroup>
+            </p:dialog>
         </h:form>
 
     </h:body>

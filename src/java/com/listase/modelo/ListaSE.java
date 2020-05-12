@@ -6,6 +6,7 @@
 package com.listase.modelo;
 
 import com.listase.excepciones.InfanteExcepcion;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.Template;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,11 @@ public class ListaSE implements Serializable{
         
     }
     
+      public  void  adicionarnodoPorPosicion(Infante infante){
+         
+    }
+      
+    
     public void adicionarNodoAlInicio(Infante infante)
     {
         if(cabeza ==null)
@@ -61,6 +67,8 @@ public class ListaSE implements Serializable{
             cabeza= temp;
         }
     }
+    
+  
     
     public short contarNodos()
     {
@@ -151,8 +159,7 @@ public class ListaSE implements Serializable{
         return 0;
         
     }
-    
-    
+
     public void invertirLista()
     {
         if(cabeza!=null)
@@ -197,6 +204,8 @@ public class ListaSE implements Serializable{
             return cont;
         }
     }
+   
+    
     /*
     Receta para eliminar un niño 
  Primero, preguntar el código del niño que desea eliminar.
