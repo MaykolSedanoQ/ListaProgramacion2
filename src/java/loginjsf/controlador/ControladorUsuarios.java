@@ -51,6 +51,10 @@ public class ControladorUsuarios {
         usuarios.add(new Usuario("maykol-1.6@outlook.com","oncecaldas2004","Maykol Sedano",
          tiposUsuario.get(0)));
         
+        usuarios = new ArrayList<>();
+        usuarios.add(new Usuario("mseedanoquintero@umanizales.co", "123456789","Maykoll Quintero",
+                tiposUsuario.get(0)));
+        
            }
     
     
