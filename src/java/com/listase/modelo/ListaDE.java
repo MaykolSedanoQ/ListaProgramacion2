@@ -242,7 +242,27 @@ public class ListaDE implements Serializable {
         }
         return cant;
     }
-    
+//     public void intercambiar(int pos1, int pos2)
+//{
+//    if (pos1 <= cantidad() && pos2 <= cantidad())
+//    {
+//        NodoDE nodo1 =this.cabeza;
+//        int f;
+//        for (f = 1; f < pos1; f++)
+//        {
+//            nodo1 = nodo1.getSiguiente();
+//        }
+//        NodoDE nodo2  = this.cabeza;
+//        for (f = 1; f < pos2; f++)
+//        {
+//            nodo2=nodo2.getSiguiente();
+//        }
+//        int aux = nodo1.getDato().getCodigo();
+//        nodo1.setDato(nodo2.getDato());
+//        
+//        nodo2.setDato(nodo1.getDato());
+//    }
+//}
    public void adicionarPosicion(int pos, Infante x)
     {
         if (pos <= cantidad () + 1)    {

@@ -62,6 +62,8 @@ public class SesionInfanteDE implements Serializable {
     private Infante infanteMenorEdad;
     
     private Infante posicionInfante;
+    private int pos1;
+    private int pos2;
     
     private int posInfante;
     private String opcionElegida="1";
@@ -157,11 +159,16 @@ public class SesionInfanteDE implements Serializable {
     public void setInfanteSeleccionado(short infanteSeleccionado) {
         this.infanteSeleccionado = infanteSeleccionado;
     }
-    
-    
-
     public String getCodigoDeptoSel() {
         return codigoDeptoSel;
+    }
+
+    public int getPos1() {
+        return pos1;
+    }
+
+    public int getPos2() {
+        return pos2;
     }
 
     public void setCodigoDeptoSel(String codigoDeptoSel) {
@@ -679,6 +686,10 @@ public class SesionInfanteDE implements Serializable {
 
     
     
+//     public void cambiarPosicionCodigo()
+//    {
+//         listaInfantes.intercambiar(pos1, pos2);
+//    }
     
     
     

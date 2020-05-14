@@ -114,6 +114,7 @@
                         <p:commandButton value="Posicion" action="#{sesionInfanteDE.guardarInfantePos()}" 
                                          update="frmInfante,:grwlErrores"
                                          />
+                        
 
                         <br>
                             <p:outputLabel value="Buscar por posicion: "/>
@@ -121,6 +122,10 @@
                             <p:commandButton value="Codigo a buscar" action="#{sesionInfanteDE.retornarPosicion()}" 
                                              update="frmInfante,:grwlErrores"
                                              />                        </br>
+                        
+                                  
+                        
+
 
                     </p:panel>
                     <p:panel header="Reportes">
@@ -137,6 +142,9 @@
                             <p:outputLabel value="#{sesionInfanteDE.listaInfantes.obtenerMenorEdad()}"
                                            />
                         </h:panelGrid>
+
+
+                        
 
                     </p:panel>
 
@@ -221,10 +229,10 @@
                                     action="#{sesionInfanteDE.obtenerPosicionInfante()}"
                                     update="panelGestionPosicion"                                    
                                     oncomplete="PF('dlgGestionPosicionInfante').show();"/>
-                         
 
 
-                     
+
+
 
                     </p:contextMenu>
                 </p:panel>
@@ -249,10 +257,10 @@
 
                 </p:panel>
             </p:dialog> 
-            
-              <p:dialog id="gestionPosicionInfante" header="Adelantar/perder posición infante" 
+
+            <p:dialog id="gestionPosicionInfante" header="Adelantar/perder posición infante" 
                       widgetVar="dlgGestionPosicionInfante"
-                modal="true" height="150">                          
+                      modal="true" height="150">                          
                 <h:panelGroup id="panelGestionPosicion">
                     <h:panelGrid columns="2">
                         <p:outputLabel value="Posición Actual"/>
@@ -268,8 +276,8 @@
                     <p:commandButton value="Aplicar" action="#{sesionInfanteDE.cambiarPosicion()}"
                                      onclick="PF('dlgGestionPosicionInfante').hide();"
                                      ajax="false"
-                                      update="pnlVista"/>
-                    
+                                     update="pnlVista"/>
+
                 </h:panelGroup>
             </p:dialog>
         </h:form>
