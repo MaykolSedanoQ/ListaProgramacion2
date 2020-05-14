@@ -263,6 +263,22 @@ public class ListaDE implements Serializable {
 //        nodo2.setDato(nodo1.getDato());
 //    }
 //}
+    
+    public void intercambiarInfante (int pos1, int pos2) throws InfanteExcepcion{
+         if (pos1 <= cantidad () && pos2 <= cantidad ())    {
+              NodoDE temp1= cabeza;
+            for (int f = 1 ; f < pos1 ; f++)
+                temp1 = temp1.getSiguiente();
+            NodoDE temp2 = cabeza;
+            for (int f = 1 ; f < pos2 ; f++)
+                temp2 = temp2.getSiguiente();
+              Infante aux = temp1.getDato();
+//            temp1.getDato() = temp2.getDato();
+//            temp2.getDato() = aux;
+
+         }
+      
+    }
    public void adicionarPosicion(int pos, Infante x)
     {
         if (pos <= cantidad () + 1)    {
