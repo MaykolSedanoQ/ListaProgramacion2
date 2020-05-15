@@ -46,7 +46,7 @@ public class SesionMotoGp implements Serializable {
     private short pilotoSeleccionado;
     private CorredorMotoGp pilotoDiagrama;
     private int numeroPosiciones=0;
-        private CorredorMotoGp posicionPiloto;
+    private CorredorMotoGp posicionPiloto;
     private int pos1;
     private int pos2;
     
@@ -77,6 +77,70 @@ public class SesionMotoGp implements Serializable {
     
     public int getNumeroPosiciones() {
         return numeroPosiciones;
+    }
+
+    public int getPosPiloto() {
+        return posPiloto;
+    }
+
+    public void setPosPiloto(int posPiloto) {
+        this.posPiloto = posPiloto;
+    }
+
+    public String getOpcionElegida() {
+        return opcionElegida;
+    }
+
+    public void setOpcionElegida(String opcionElegida) {
+        this.opcionElegida = opcionElegida;
+    }
+
+    public int getNumeroPosicion() {
+        return numeroPosicion;
+    }
+
+    public void setNumeroPosicion(int numeroPosicion) {
+        this.numeroPosicion = numeroPosicion;
+    }
+
+    public short getPosicionBuscar() {
+        return posicionBuscar;
+    }
+
+    public void setPosicionBuscar(short posicionBuscar) {
+        this.posicionBuscar = posicionBuscar;
+    }
+
+    public short getCodPiloto() {
+        return codPiloto;
+    }
+
+    public void setCodPiloto(short codPiloto) {
+        this.codPiloto = codPiloto;
+    }
+
+    public CorredorMotoGp getPosicionPiloto() {
+        return posicionPiloto;
+    }
+
+    public void setPosicionPiloto(CorredorMotoGp posicionPiloto) {
+        this.posicionPiloto = posicionPiloto;
+    }
+
+    public int getPos1() {
+        return pos1;
+    }
+
+    public void setPos1(int pos1) {
+        this.pos1 = pos1;
+    }
+
+    public int getPos2() {
+        return pos2;
+    }
+
+    public void setPos2(int pos2) {
+        this.pos2 = pos2;
     }
     
     public ListaMotoGp getListaPilotos() {
@@ -382,7 +446,7 @@ public class SesionMotoGp implements Serializable {
    //--------------------------------------------------
  
      
-     public void obtenerPosicionInfante()
+     public void obtenerPosicionPiloto()
     {
         try {
             posPiloto = listaPilotos.obtenerPosicionPiloto(pilotoSeleccionado);
