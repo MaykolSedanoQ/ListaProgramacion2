@@ -683,14 +683,6 @@ public class SesionInfanteDE implements Serializable {
             JsfUtil.addErrorMessage("El número de posiciones no es válido para el infante dado");
         }
     }
-
-    
-    
-//     public void cambiarPosicionCodigo()
-//    {
-//         listaInfantes.intercambiar(pos1, pos2);
-//    }
-    
     
     
 }

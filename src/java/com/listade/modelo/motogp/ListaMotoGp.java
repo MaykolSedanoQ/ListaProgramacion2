@@ -194,8 +194,52 @@ public  void eliminarPiloto(short numeroPiloto )throws PilotosExcepcion{
      public void prueba (){
          
      }
+     
+      public int obtenerPosicionPiloto(short codigo) throws PilotosExcepcion {
+        if (cabeza != null) {
+            int cont = 1;
+            NodoMotoGp temp = cabeza;
+            while (temp != null) {
+                if (temp.getDato().getNumeroPiloto()== codigo) {
+                    return cont;
+                }
+                temp = temp.getSiguiente();
+                cont++;
+            }
+            throw new PilotosExcepcion("El código ingresado no ");
 
+        }
+        throw new PilotosExcepcion("La lista de pilotos está vacía");
+    }
+ public void adicionarNodoPosicion(int posicion, CorredorMotoGp dato) throws PilotosExcepcion {
+        if (cabeza != null) {
+            if (posicion == 1) {
+                adiccionarPilotoAlInicio(dato);               
+            } else {
+                int cont = 1;
+                NodoMotoGp temp = cabeza;
+                while (temp != null) {
+                    if ((posicion - 1) == cont) {
+                        NodoMotoGp nodoInsertar = new NodoMotoGp(dato);
+                        nodoInsertar.setSiguiente(temp.getSiguiente());
+                        temp.setSiguiente(nodoInsertar);
+                        if(nodoInsertar.getSiguiente()!=null)
+                            nodoInsertar.getSiguiente().setAnterior(nodoInsertar);
+                        nodoInsertar.setAnterior(temp);
+                        break ;
+                    }
+                    temp = temp.getSiguiente();
+                    cont++;
+                }
+            }
+        }
+        else{
+            throw new PilotosExcepcion(("La lista está vacía"));
+        }
+    }
 }
+
+
 
 
 

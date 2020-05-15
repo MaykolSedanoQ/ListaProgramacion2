@@ -242,43 +242,7 @@ public class ListaDE implements Serializable {
         }
         return cant;
     }
-//     public void intercambiar(int pos1, int pos2)
-//{
-//    if (pos1 <= cantidad() && pos2 <= cantidad())
-//    {
-//        NodoDE nodo1 =this.cabeza;
-//        int f;
-//        for (f = 1; f < pos1; f++)
-//        {
-//            nodo1 = nodo1.getSiguiente();
-//        }
-//        NodoDE nodo2  = this.cabeza;
-//        for (f = 1; f < pos2; f++)
-//        {
-//            nodo2=nodo2.getSiguiente();
-//        }
-//        int aux = nodo1.getDato().getCodigo();
-//        nodo1.setDato(nodo2.getDato());
-//        
-//        nodo2.setDato(nodo1.getDato());
-//    }
-//}
-    
-    public void intercambiarInfante (int pos1, int pos2) throws InfanteExcepcion{
-         if (pos1 <= cantidad () && pos2 <= cantidad ())    {
-              NodoDE temp1= cabeza;
-            for (int f = 1 ; f < pos1 ; f++)
-                temp1 = temp1.getSiguiente();
-            NodoDE temp2 = cabeza;
-            for (int f = 1 ; f < pos2 ; f++)
-                temp2 = temp2.getSiguiente();
-              Infante aux = temp1.getDato();
-//            temp1.getDato() = temp2.getDato();
-//            temp2.getDato() = aux;
 
-         }
-      
-    }
    public void adicionarPosicion(int pos, Infante x)
     {
         if (pos <= cantidad () + 1)    {
@@ -373,6 +337,57 @@ public class ListaDE implements Serializable {
 
         }
         throw new InfanteExcepcion("La lista de infantes está vacía");
+    }
+    
+    //----------------------------------------------
+    //     public void intercambiar(int pos1, int pos2)
+//{
+//    if (pos1 <= cantidad() && pos2 <= cantidad())
+//    {
+//        NodoDE nodo1 =this.cabeza;
+//        int f;
+//        for (f = 1; f < pos1; f++)
+//        {
+//            nodo1 = nodo1.getSiguiente();
+//        }
+//        NodoDE nodo2  = this.cabeza;
+//        for (f = 1; f < pos2; f++)
+//        {
+//            nodo2=nodo2.getSiguiente();
+//        }
+//        int aux = nodo1.getDato().getCodigo();
+//        nodo1.setDato(nodo2.getDato());
+//        
+//        nodo2.setDato(nodo1.getDato());
+//    }
+//}
+    
+ public void intercambiarNodos(byte datoA, byte datoB) throws InfanteExcepcion{
+        if (cabeza != null){
+            throw new InfanteExcepcion("La lista de infantes está vacía");
+        } else {
+            NodoDE temp = cabeza;
+            Infante tempDatoA = null;
+            Infante tempDatoB = null;
+            while (temp!=null) {
+                if (temp.getDato().getCodigo() == datoA){
+                    tempDatoA=temp.getDato();
+                }
+                else if (temp.getDato().getCodigo() == datoB) {
+                    tempDatoB=temp.getDato();
+                }
+                temp = temp.getSiguiente();
+            }
+            
+            if ( tempDatoA==null || tempDatoB==null)
+                throw new InfanteExcepcion("Alguno de los datos son erroneos");
+            
+            Infante infanteTemp = tempDatoA;
+            tempDatoA = tempDatoB;
+            tempDatoB = infanteTemp;
+            
+        }
+    
     }
 
 }

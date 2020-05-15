@@ -46,6 +46,15 @@ public class SesionMotoGp implements Serializable {
     private short pilotoSeleccionado;
     private CorredorMotoGp pilotoDiagrama;
     private int numeroPosiciones=0;
+        private CorredorMotoGp posicionPiloto;
+    private int pos1;
+    private int pos2;
+    
+    private int posPiloto;
+    private String opcionElegida="1";
+    private  int  numeroPosicion=1;
+    private short posicionBuscar;
+    private short codPiloto;
 
     /**
      * Creates a new instance of SesionMotoGp
@@ -371,64 +380,65 @@ public class SesionMotoGp implements Serializable {
    }
    
    //--------------------------------------------------
-
-     public void Adelantar(NodoMotoGp temp, int posAd) {
-        int cont = 0;
-        NodoMotoGp tempA = temp;
-
-        //mientras que
-        while ((cont < posAd) && (tempA != null)) {
-            tempA = temp;
-            cont++;
-        }//fin del mientras que
-
-        //Inicio del si
-        if (tempA != null) {
-            tempA = temp.getSiguiente();
-            cont = 0;
-            //inicio del mientras que
-            NodoMotoGp tempIn= new NodoMotoGp(corredor);
-
-            while (cont < posAd) {
-                tempIn.setDato(tempA.getDato());
-                tempA.setDato(temp.getDato());
-                temp.setDato(tempIn.getDato());
-                tempA = tempA.getSiguiente();
-                temp = temp.getSiguiente();
-                cont++;
-            }//fin del mientras que
-
-        }//fin del si
+ 
+     
+     public void obtenerPosicionInfante()
+    {
+        try {
+            posPiloto = listaPilotos.obtenerPosicionPiloto(pilotoSeleccionado);
+        } catch (PilotosExcepcion ex) {
+            JsfUtil.addErrorMessage(ex.getMessage());
+        }
     }
     
-    //perder poos
-    public void PerderPos(NodoMotoGp temp, int posAd) {
-        int cont = 0;
-        NodoMotoGp tempA = temp;
-
-        //mientras que
-        while ((cont < posAd) && (tempA != null)) {
-            tempA = temp;
-            cont++;
-        }//fin del mientras que
-
-        //Inicio del si
-        if (tempA != null) {
-            tempA = temp.getAnterior();
-            cont = 0;
-            //inicio del mientras que
-            NodoMotoGp tempIn= new NodoMotoGp(corredor);
-            while (cont < posAd) {
-                tempIn.setDato(tempA.getDato());
-                tempA.setDato(temp.getDato());
-                temp.setDato(tempIn.getDato());
-                tempA = tempA.getAnterior();
-                temp = temp.getAnterior();
-                cont++;
-            }//fin del mientras que
-
-        }//fin del si
+     
+     public void cambiarPosicion()
+    {
+        boolean bandera=false;
+        int posicionFinal=0;
+        switch(opcionElegida)
+        {
+            //Ganar
+            case "1":
+                if(numeroPosicion <= (posPiloto-1) )
+                {
+                    bandera=true;
+                    posicionFinal = posPiloto - numeroPosicion;
+                }
+                break;
+            //Perder
+            case "0":
+                if(numeroPosicion <= (listaPilotos.contarPilotos()-posPiloto))
+                {
+                    bandera=true;
+                    posicionFinal = posPiloto + numeroPosicion;
+                }
+                break;
+        }
+        
+        if(bandera)
+        {
+            try {
+                //Realizaria la función de insertar
+                CorredorMotoGp datosPiloto = listaPilotos.obtenerPiloto(pilotoSeleccionado);
+                // cambia la cantidad de infantes
+                listaPilotos.eliminarPiloto(pilotoSeleccionado);
+                listaPilotos.adicionarNodoPosicion(posicionFinal, datosPiloto);
+                irAlPrimerPiloto();
+                JsfUtil.addSuccessMessage("Se ha realizado el cambio");
+                
+                
+            } catch (PilotosExcepcion ex) {
+               JsfUtil.addErrorMessage(ex.getMessage());
+            }
+            
+        }
+        else
+        {
+            JsfUtil.addErrorMessage("El número de posiciones no es válido para el Piloto dado");
+        }
     }
+    
    
    
 }
