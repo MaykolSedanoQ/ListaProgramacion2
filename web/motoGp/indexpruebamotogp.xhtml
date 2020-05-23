@@ -15,6 +15,9 @@
                 box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
                 border-radius: 4px;
                 border: 1px solid transparent;
+                width:10.5em;
+                height: 10.5em;
+                background: url("../imagenes/motosilueta.png") ; 
                 background-color: #98AFC7;
                 color: #ffffff;
             }
@@ -180,16 +183,20 @@
                     <p:contextMenu id="menuDiagrama" for="diagrama"
                                    targetFilter=".ui-diagram-element">
                         <p:menuitem value="Ver Datos Del Piloto"
-                                    action="#{sesionMotoGp.obtenerDiagramaPilotos()}"
-                                    oncomplete="PF('dlgDatosInfante').show();"/>
+                                    action="#{sesionMotoGp.obtenerDiagramaPilotos()}" update="panelPiloto"
+                                    oncomplete="PF('dlgDatosPiloto').show();"/>
                         
                         <p:menuitem value="Enviar Piloto a la primera posicion" update="pnlVista"
                                  action="#{sesionMotoGp.enviarPilotoPrimeraPos()}"/>
                         
                         <p:menuitem value="Enviar Piloto a la ultima posicion" update="pnlVista"
                                  action="#{sesionMotoGp.enviarPilotoUltimaPos()}"/>
-                        
+          <p:menuitem value="Adelantar/Perder Posicion"
+                      action="#{sesionMotoGp.obtenerPosicionPiloto()}"  update="panelGestionPosicion"
+                                    oncomplete="PF('dlgGestionPosicionPiloto').show();"/>
+                    
 
+                        
                     </p:contextMenu> 
                     
                 </p:panel>
@@ -197,7 +204,7 @@
 
             </p:panel> <!--panel del final-->
             
-            <p:dialog id="modalPiloto" header="Datos dell Piloto" widgetVar="dlgDatosPiloto" 
+            <p:dialog id="modalPiloto" header="Datos del Piloto" widgetVar="dlgDatosPiloto" 
                       modal="true" height="100">
                 <p:panel id="panelPiloto">
                     <h:panelGrid columns="2">
@@ -215,7 +222,7 @@
             </p:dialog> 
                       
           
-            <!--<p:dialog id="gestionPosicionPiloto" header="Adelantar/perder posición Piloto" 
+            <p:dialog id="gestionPosicion" header="Adelantar/perder posición Piloto" 
                       widgetVar="dlgGestionPosicionPiloto"
                       modal="true" height="150">                          
                 <h:panelGroup id="panelGestionPosicion">
@@ -228,39 +235,16 @@
                             <f:selectItem itemLabel="Perder" itemValue="0"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="Número posiciones"/>
-                        <p:spinner min="1" value="#{sesionMotoGp.numeroPosiciones}"/>
+                        <p:spinner min="1" value="#{sesionMotoGp.numeroPosicion}"/>
                     </h:panelGrid>
-                    <p:commandButton value="Aplicar" action="#{sesionInfanteDE.cambiarPosicion()}"
-                                     onclick="PF('dlgGestionPosicion').hide();"
-                                     ajax="false"
-                                     update="pnlVista"/>
-
-                </h:panelGroup>
-            </p:dialog>-->
-            
-             <!--<p:dialog id="gestionPosicionPiloto" header="Adelantar/perder posición Piloto" 
-                      widgetVar="dlgGestionPosicionPiloto"
-                      modal="true" height="150">                          
-                <h:panelGroup id="panelGestionPosicion">
-                    <h:panelGrid columns="2">
-                        <p:outputLabel value="Posición Actual"/>
-                        <p:outputLabel value="#{sesionMotoGp.posicionPiloto}"/>
-                        <p:outputLabel value="Acción"/>
-                        <p:selectOneMenu value="#{sesionMotoGp.opcionElegida}">
-                            <f:selectItem itemLabel="Ganar" itemValue="1"/>
-                            <f:selectItem itemLabel="Perder" itemValue="0"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="Número posiciones"/>
-                        <p:spinner min="1" value="#{sesionMotoGp.numeroPosiciones}"/>
-                    </h:panelGrid>
-                    <p:commandButton value="Aplicar" action="#{sesionInfanteDE.cambiarPosicion()}"
+                    <p:commandButton value="Aplicar" action="#{sesionMotoGp.cambiarPosicion()}"
                                      onclick="PF('dlgGestionPosicionPiloto').hide();"
                                      ajax="false"
                                      update="pnlVista"/>
 
                 </h:panelGroup>
-            </p:dialog>-->
-
+            </p:dialog>
+            
 
         </h:form>
 

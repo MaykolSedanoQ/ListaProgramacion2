@@ -387,7 +387,7 @@ public class SesionMotoGp implements Serializable {
         String id = FacesContext.getCurrentInstance().getExternalContext()
                 .getRequestParameterMap().get("elementId");
 
-        pilotoSeleccionado = Short.valueOf(id.replaceAll("frmInfante:diagrama-", ""));
+        pilotoSeleccionado = Short.valueOf(id.replaceAll("frmMotoGp:diagrama-", ""));
 
     }
     //----------------------------------------------------------------------------------------------
