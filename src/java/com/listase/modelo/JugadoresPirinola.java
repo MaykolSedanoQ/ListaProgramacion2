@@ -14,11 +14,24 @@ import java.io.Serializable;
 public class JugadoresPirinola implements Serializable {
 
 private String nombre;
-
+private int fichas;
 
 //constructores
 
     public JugadoresPirinola() {
+    }
+
+    public JugadoresPirinola(String nombre, int fichas) {
+        this.nombre = nombre;
+        this.fichas = fichas;
+    }
+
+    public int getFichas() {
+        return fichas;
+    }
+
+    public void setFichas(int fichas) {
+        this.fichas = fichas;
     }
 
     public JugadoresPirinola(String nombre) {
@@ -39,7 +52,8 @@ private String nombre;
 
     @Override
     public String toString() {
-        return "JugadoresPirinola{" + "nombre=" + nombre + '}';
+        return "JugadoresPirinola{" + "nombre=" + nombre + ", fichas=" + fichas + '}';
     }
-    
+
+
 }
