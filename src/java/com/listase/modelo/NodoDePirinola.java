@@ -12,21 +12,30 @@ package com.listase.modelo;
 public class NodoDePirinola {
     
     
-    private JugadoresPirinola dato;
+    private JugadorPirinola dato;
     private NodoDePirinola siguiente;
     private NodoDePirinola anterior;
     
     //constructor
 
-    public NodoDePirinola(JugadoresPirinola dato) {
+    public NodoDePirinola() {
+    }
+
+    public NodoDePirinola(JugadorPirinola dato, NodoDePirinola siguiente, NodoDePirinola anterior) {
+        this.dato = dato;
+        this.siguiente = siguiente;
+        this.anterior = anterior;
+    }
+
+    public NodoDePirinola(JugadorPirinola dato) {
         this.dato= dato;
     }
 
-    public JugadoresPirinola getDato() {
+    public JugadorPirinola getDato() {
         return dato;
     }
 
-    public void setDato(JugadoresPirinola dato) {
+    public void setDato(JugadorPirinola dato) {
         this.dato = dato;
     }
 

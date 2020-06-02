@@ -5,7 +5,8 @@
  */
 package com.listacircularde.modelo;
 
-import com.listase.modelo.JugadoresPirinola;
+import com.listase.excepciones.JugadorException;
+import com.listase.modelo.JugadorPirinola;
 import com.listase.modelo.NodoDePirinola;
 import java.io.Serializable;
 
@@ -32,21 +33,40 @@ public class ListaCircularPirinolaDE implements Serializable {
         this.cabeza = cabeza;
     }
 
-    public void adiccionarNodo(JugadoresPirinola jugador) {
-
+       public void adicionarNodo(JugadorPirinola jugador) {
         if (cabeza == null) {
             cabeza = new NodoDePirinola(jugador);
-            //aqui se hacen los enlaces circulares
+            ///Hago los enlaces circulares
+            cabeza.setSiguiente(cabeza);
+            cabeza.setAnterior(cabeza);
+
+        } else {
+            //Lamo a mi ayudante
+            NodoDePirinola temp = cabeza.getAnterior();
+            //temp= temp.getAnterior();
+            NodoDePirinola nodoInsertar = new NodoDePirinola(jugador);
+            temp.setSiguiente(nodoInsertar);
+            nodoInsertar.setAnterior(temp);
+            nodoInsertar.setSiguiente(cabeza);
+            cabeza.setAnterior(nodoInsertar);
+        }
+    }
+
+    public void adicionarNodoAlInicio(JugadorPirinola jugador) {
+        if (cabeza == null) {
+            cabeza = new NodoDePirinola(jugador);
+            ///Hago los enlaces circulares
             cabeza.setSiguiente(cabeza);
             cabeza.setAnterior(cabeza);
         } else {
-            //llamar a mi ayudante
             NodoDePirinola temp = cabeza.getAnterior();
-            NodoDePirinola nodoInsetar = new NodoDePirinola(jugador);
-            temp.setSiguiente(nodoInsetar);
-            nodoInsetar.setAnterior(temp);
-            nodoInsetar.setSiguiente(cabeza);
-            cabeza.setAnterior(nodoInsetar);
+            //temp= temp.getAnterior();
+            NodoDePirinola nodoInsertar = new NodoDePirinola(jugador);
+            temp.setSiguiente(nodoInsertar);
+            nodoInsertar.setAnterior(temp);
+            nodoInsertar.setSiguiente(cabeza);
+            cabeza.setAnterior(nodoInsertar);
+            cabeza = cabeza.getAnterior();
         }
     }
 
@@ -65,27 +85,75 @@ public class ListaCircularPirinolaDE implements Serializable {
         }
     }
 
-    public void eliminarJugador(short fichas) {
-
+    public String listarJugadores(String listado) throws JugadorException {
         if (cabeza != null) {
-            if (cabeza.getDato().getFichas() == 0) {
-                cabeza = cabeza.getSiguiente();
-                cabeza.setAnterior(null);
-                return;
+            NodoDePirinola temp = cabeza;
+//            while (temp.getSiguiente() != cabeza) {
+//                listado += temp.getDato() + "\n";
+//                temp = temp.getSiguiente();
+//            }
+//            listado += temp.getDato() + "\n";
+            do {
+                listado += temp.getDato() + "\n";
+                temp = temp.getSiguiente();
+            } while (temp != cabeza);
+
+            return listado;
+        }
+        throw new JugadorException(("No existen jugadors en la lista"));
+    }
+
+    //Eliminar NOdo
+    public void eliminarNodo(String nombre) throws JugadorException {
+        if (cabeza != null) {
+            if (cabeza.getSiguiente() == cabeza) {
+                if (cabeza.getDato().getNombre().equals(nombre)) {
+                    cabeza = null;
+                    return;
+                }
             } else {
                 NodoDePirinola temp = cabeza;
-                while (temp.getSiguiente() != null) {
-                    if (temp.getSiguiente().getDato().getFichas() == 0) {
-                        temp.setSiguiente(temp.getSiguiente().getSiguiente());
-                        if (temp.getSiguiente() != null) {
-                            temp.getSiguiente().setAnterior(temp);
-                        }
+                do {
+                    if (temp.getDato().getNombre().equals(nombre)) {
+                        //estamos parados en el que hay que eliminar
+                        temp.getAnterior().setSiguiente(temp.getSiguiente());
+                        temp.getSiguiente().setAnterior(temp.getAnterior());
                         return;
                     }
                     temp = temp.getSiguiente();
-                }
-
+                } while (temp != cabeza);
             }
+            throw new JugadorException(("El Jugador no se encuentra en la lista"));
+        } else {
+            throw new JugadorException(("No existen jugadors en la lista"));
         }
+    }
+    
+    public int obtenerMayoresFichas() throws JugadorException {
+        if (cabeza == null) {
+            throw new JugadorException("La lista de pilotos está vacía");
+        } else {
+            NodoDePirinola temp = cabeza;
+            int max = temp.getDato().getFichas();
+            do {
+                if (temp.getDato().getFichas() > max) {
+                    max = temp.getDato().getFichas();
+                }
+                temp = temp.getSiguiente();
+            } while (temp != cabeza);
+            return max;
+        }
+    }
+    
+    public String obtenerGanadores()throws JugadorException{
+        int numFichas = obtenerMayoresFichas();
+        NodoDePirinola temp = cabeza;
+        String ganadores="";
+        do{
+            if (temp.getDato().getFichas() == numFichas)
+                ganadores += temp.getDato().getNombre() + ", ";
+            temp=temp.getSiguiente();
+        }while(temp!=cabeza);
+        return ganadores;
     }
 }

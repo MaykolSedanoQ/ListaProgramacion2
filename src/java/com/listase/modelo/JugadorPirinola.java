@@ -11,20 +11,24 @@ import java.io.Serializable;
  *
  * @author Maykol Sedano
  */
-public class JugadoresPirinola implements Serializable {
+public class JugadorPirinola implements Serializable {
 
 private String nombre;
 private int fichas;
+private String correo;
 
 //constructores
 
-    public JugadoresPirinola() {
+    public JugadorPirinola() {
     }
 
-    public JugadoresPirinola(String nombre, int fichas) {
+    public JugadorPirinola(String nombre, String correo, int fichas) {
         this.nombre = nombre;
         this.fichas = fichas;
+        this.correo= correo;
     }
+
+ 
 
     public int getFichas() {
         return fichas;
@@ -34,7 +38,15 @@ private int fichas;
         this.fichas = fichas;
     }
 
-    public JugadoresPirinola(String nombre) {
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public JugadorPirinola(String nombre) {
         this.nombre = nombre;
     }
 
